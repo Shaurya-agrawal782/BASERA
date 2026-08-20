@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import Lenis from "lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import API from "../api/client";
 import HeroBanner from "../components/HeroBanner";
 import PressSection from "../components/PressSection";
@@ -13,6 +16,8 @@ import HostSection from "../components/HostSection";
 import NewsletterSection from "../components/NewsletterSection";
 import ListingCard from "../components/ListingCard";
 import { Sparkles, X, RefreshCw, ArrowRight } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const CATEGORY_TABS = [
   { label: "All", value: "" },
@@ -51,6 +56,57 @@ const HomePage = () => {
   useEffect(() => {
     fetchListings();
   }, [categoryParam, queryParam]);
+
+  // Ultra-Luxury Smooth Scrolling & GSAP ScrollTrigger Soft Reveals
+  useEffect(() => {
+    // 1. Initialize Lenis Smooth Scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      smoothTouch: false,
+    });
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    const updateLenis = (time) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(updateLenis);
+    gsap.ticker.lagSmoothing(0);
+
+    // 2. Soft Reveal Animations for Homepage Sections
+    const revealElements = document.querySelectorAll(
+      ".figma-section-header, .figma-featured-header, .figma-stays-grid, .curated-collections-section, .beyond-atelier-layout, .host-atelier-card, .gazette-card, .figma-spotlight-card, .jhalar-header-center"
+    );
+
+    const triggers = [];
+    revealElements.forEach((el) => {
+      const anim = gsap.fromTo(
+        el,
+        { opacity: 0, y: 28 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+      if (anim.scrollTrigger) triggers.push(anim.scrollTrigger);
+    });
+
+    return () => {
+      triggers.forEach((st) => st.kill());
+      gsap.ticker.remove(updateLenis);
+      lenis.destroy();
+    };
+  }, [listings]);
 
   const handleCategorySelect = (category) => {
     const nextParams = new URLSearchParams(searchParams);

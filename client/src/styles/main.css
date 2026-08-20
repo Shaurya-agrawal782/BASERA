@@ -3,6 +3,22 @@
    FULLY RESPONSIVE (Mobile 320px -> Ultra-wide 4K)
    ========================================================================== */
 
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 :root {
   --text-dark: #111827;
   --text-body: #374151;
@@ -368,22 +384,22 @@ h6 {
   height: 32px;
   border-radius: 50%;
   background: #FFFFFF;
-  border: 1.5px solid #D97706;
-  color: #D97706;
+  border: 1.5px solid #111827;
+  color: #111827;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 1px 5px rgba(217, 119, 6, 0.15);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   transition: all 0.25s ease;
 }
 
 .basera-profile-trigger-btn:hover .profile-avatar-circle,
 .basera-profile-trigger-btn.active .profile-avatar-circle {
-  background: #FEF3C7;
-  border-color: #B45309;
-  color: #B45309;
-  box-shadow: 0 2px 10px rgba(217, 119, 6, 0.3);
+  background: #111827;
+  border-color: #111827;
+  color: #FFFFFF;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
 }
 
@@ -391,7 +407,12 @@ h6 {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #D97706;
+  color: #111827;
+}
+
+.basera-profile-trigger-btn:hover .avatar-initial,
+.basera-profile-trigger-btn.active .avatar-initial {
+  color: #FFFFFF;
 }
 
 .profile-label-text {
@@ -2153,72 +2174,407 @@ h6 {
 }
 
 /* ==========================================================================
-   9. BEYOND THE STAY (RESPONSIVE)
+   9. BEYOND THE STAY (CIRCULAR ORBIT WHEEL & SQUARE DETAIL ATELIER)
    ========================================================================== */
 .figma-beyond-section {
-  padding: clamp(3.5rem, 6vw, 6rem) 0;
-  background: #FFFFFF;
+  padding: clamp(4.5rem, 7vw, 7rem) 0;
+  background: #FAF9F6;
+  border-top: 1px solid #EFECE6;
+  border-bottom: 1px solid #EFECE6;
+  overflow: hidden;
+  position: relative;
 }
 
-.figma-beyond-grid {
+.beyond-atelier-layout {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: clamp(2rem, 3.5vw, 3.5rem);
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: center;
+  margin-top: clamp(2.5rem, 4vw, 3.5rem);
 }
 
-.figma-beyond-card {
+/* Left 50%: Rotating Circular Orbit Column */
+.beyond-orbit-column {
   display: flex;
   flex-direction: column;
-  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 440px;
 }
 
-.figma-beyond-image-wrapper {
-  aspect-ratio: 16 / 10;
-  border-radius: var(--radius-lg);
+.beyond-orbit-stage {
+  position: relative;
+  width: 480px;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbit-track-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(217, 119, 6, 0.35);
+  pointer-events: none;
+}
+
+.orbit-track-ring-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  pointer-events: none;
+}
+
+.orbit-center-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1.5px solid #EFECE6;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.orbit-compass-icon {
+  color: #D97706;
+}
+
+.hub-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #111827;
+  margin-top: 2px;
+}
+
+.hub-count {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #9CA3AF;
+}
+
+.orbit-canvas-center {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+}
+
+.orbit-circle-node {
+  position: absolute;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  padding: 4px;
+  background: #FFFFFF;
+  border: 2.5px solid #E6E4DF;
   overflow: hidden;
-  background: var(--bg-subtle);
-  margin-bottom: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
 }
 
-.figma-beyond-img {
+.orbit-circle-node:hover {
+  border-color: #D97706;
+  box-shadow: 0 0 32px rgba(217, 119, 6, 0.55);
+  z-index: 10;
+}
+
+.orbit-circle-node.active {
+  border-color: #F59E0B;
+  box-shadow: 0 0 40px rgba(245, 158, 11, 0.8), 0 10px 25px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.orbit-circle-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.figma-beyond-card:hover .figma-beyond-img {
-  transform: scale(1.05);
-}
-
-.beyond-location {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-light);
+  border-radius: 50%;
   display: block;
-  margin-bottom: 2px;
 }
 
-.beyond-title {
+.orbit-node-index {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1px 4px;
+  border-radius: 9999px;
+}
+
+.orbit-instruction-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #6B7280;
+  margin-top: 1.5rem;
+  background: #FFFFFF;
+  border: 1px solid #EFECE6;
+  padding: 0.35rem 0.95rem;
+  border-radius: 9999px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+/* Right 50%: Square Editorial Showcase Card */
+.beyond-detail-column {
+  width: 100%;
+}
+
+.beyond-square-card {
+  background: #FFFFFF;
+  border: 1px solid #EFECE6;
+  border-radius: 28px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.square-photo-banner {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #111827;
+}
+
+.square-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.square-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.square-category-badge {
+  position: absolute;
+  top: 1.15rem;
+  left: 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  background: rgba(14, 18, 27, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 9999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.square-price-pill {
+  position: absolute;
+  bottom: 1.15rem;
+  right: 1.15rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 0.4rem 0.95rem;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(217, 119, 6, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 9999px;
+  color: #FFFFFF;
+}
+
+.price-val {
   font-family: var(--font-serif);
-  font-size: clamp(1.15rem, 1.8vw, 1.3rem);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #FBBF24;
+}
+
+.price-unit {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.square-detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 0 0.25rem;
+}
+
+.square-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.square-location-tag {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #D97706;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.square-duration-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6B7280;
+}
+
+.square-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
   font-weight: 500;
-  color: var(--text-dark);
-  margin-bottom: 4px;
+  color: #111827;
+  line-height: 1.2;
+  margin: 0;
 }
 
-.beyond-price {
+.square-desc {
   font-size: 0.88rem;
-  color: var(--text-muted);
+  color: #6B7280;
+  line-height: 1.6;
+  margin: 0;
 }
 
-@media (max-width: 860px) {
-  .figma-beyond-grid {
+.square-highlights-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+}
+
+.square-highlight-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.75rem;
+  background: #FAF9F6;
+  border: 1px solid #EFECE6;
+  border-radius: 9999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.highlight-check {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #FEF3C7;
+  color: #D97706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.square-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #F3F4F6;
+}
+
+.square-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.6rem;
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.3);
+}
+
+.square-primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(217, 119, 6, 0.4);
+}
+
+.square-trust-note {
+  font-size: 0.74rem;
+  color: #9CA3AF;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .beyond-atelier-layout {
     grid-template-columns: 1fr;
-    gap: 1.75rem;
+    gap: 2.5rem;
+  }
+
+  .beyond-orbit-stage {
+    width: 360px;
+    height: 360px;
+  }
+
+  .orbit-track-ring {
+    width: 270px;
+    height: 270px;
+  }
+
+  .orbit-circle-node {
+    width: 78px;
+    height: 78px;
+    top: -39px;
+    left: -39px;
   }
 }
 
