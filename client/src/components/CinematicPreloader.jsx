@@ -107,35 +107,55 @@ const CinematicPreloader = ({ onComplete }) => {
       },
     });
 
-    // 1. Golden Flare Sweep & Champagne Glow
-    tl.to(flareRef.current, {
-      opacity: 1,
-      scaleX: 3.2,
-      duration: 0.7,
-      ease: "power3.out",
-    })
-      // 2. Cinematic Center Stage Dissolve & Scale Forward
-      .to(centerStageRef.current, {
-        scale: 1.06,
-        opacity: 0,
-        filter: "blur(6px)",
-        duration: 0.9,
-        ease: "power3.inOut",
-      }, "-=0.3")
-      // 3. Staggered Vertical Lacquer Shutter Blade Retraction
-      .to(".preloader-shutter-blade", {
+    // 1. Golden Flare Sweep
+    if (flareRef.current) {
+      tl.to(flareRef.current, {
+        opacity: 1,
+        scaleX: 3.2,
+        duration: 0.7,
+        ease: "power3.out",
+      });
+    }
+
+    // 2. Cinematic Center Stage Dissolve
+    if (centerStageRef.current) {
+      tl.to(
+        centerStageRef.current,
+        {
+          scale: 1.05,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.inOut",
+        },
+        "-=0.3"
+      );
+    }
+
+    // 3. Staggered Vertical Shutter Blade Retraction
+    tl.to(
+      ".preloader-shutter-blade",
+      {
         scaleY: 0,
         transformOrigin: (i) => (i % 2 === 0 ? "top" : "bottom"),
         stagger: 0.06,
-        duration: 1.3,
+        duration: 1.1,
         ease: "power4.inOut",
-      }, "-=0.6")
-      // 4. Smooth Fade of root container
-      .to(containerRef.current, {
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-      }, "-=0.5");
+      },
+      "-=0.5"
+    );
+
+    // 4. Smooth Root Container Fade
+    if (containerRef.current) {
+      tl.to(
+        containerRef.current,
+        {
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.inOut",
+        },
+        "-=0.4"
+      );
+    }
   };
 
   useEffect(() => {
@@ -151,19 +171,18 @@ const CinematicPreloader = ({ onComplete }) => {
       }
     }, 85);
 
-    // 2. Video-Synchronized Ultra-Fluid Odometer Engine (120fps lerp)
+    // 2. Ultra-Fluid 120fps Odometer Progress Engine
     let currentPercent = 0;
     let targetPercent = 0;
     let lastRenderedFloor = -1;
     const startTime = performance.now();
-    const TARGET_DURATION = 6200; // 6.2s total build
+    const TARGET_DURATION = 6000; // 6s total cinematic duration
 
     const updateOdometer = (now) => {
       if (isFinishedRef.current) return;
 
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / TARGET_DURATION, 1);
-      // Smooth cubic-bezier acceleration and deceleration curve
       const eased = progress < 0.5
         ? 4 * progress * progress * progress
         : 1 - Math.pow(-2 * progress + 2, 3) / 2;
@@ -298,11 +317,7 @@ const CinematicPreloader = ({ onComplete }) => {
           {/* Bold Cutout Letterforms */}
           <div className="marvel-letters-row">
             {["B", "A", "S", "E", "R", "A"].map((letter, idx) => (
-              <span
-                key={idx}
-                ref={(el) => (lettersRef.current[idx] = el)}
-                className="marvel-char"
-              >
+              <span key={idx} className="marvel-char">
                 {letter}
               </span>
             ))}

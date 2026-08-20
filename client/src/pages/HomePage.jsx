@@ -403,8 +403,8 @@ const HomePage = () => {
   const handlePreloaderComplete = () => {
     gsap.fromTo(
       ".figma-hero-section",
-      { scale: 1.04, filter: "blur(4px)" },
-      { scale: 1, filter: "blur(0px)", duration: 1.4, ease: "power3.out" }
+      { scale: 1.03, opacity: 0.9 },
+      { scale: 1, opacity: 1, duration: 1.2, ease: "power3.out" }
     );
   };
 
