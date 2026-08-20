@@ -59,27 +59,13 @@ const HomePage = () => {
     fetchListings();
   }, [categoryParam, queryParam]);
 
-  // Ultra-Luxury Smooth Scrolling & Advanced GSAP ScrollTrigger Animation Suite
+  // Ultra-Luxury Smooth Directional GSAP ScrollTrigger Reveal Suite
   useEffect(() => {
-    // 1. Initialize Lenis Smooth Scroll with Premium Spring Physics
-    const lenis = new Lenis({
-      duration: 1.3,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      smoothTouch: false,
-    });
-
-    lenis.on("scroll", ScrollTrigger.update);
-
-    const updateLenis = (time) => {
-      lenis.raf(time * 1000);
-    };
-
-    gsap.ticker.add(updateLenis);
-    gsap.ticker.lagSmoothing(0);
+    // Refresh ScrollTrigger to compute exact DOM dimensions
+    ScrollTrigger.refresh();
 
     const ctx = gsap.context(() => {
-      // 2. Top Scroll Reading Progress Ribbon
+      // 1. Top Scroll Reading Progress Ribbon
       gsap.to(".basera-scroll-progress-bar", {
         scaleX: 1,
         ease: "none",
@@ -87,23 +73,11 @@ const HomePage = () => {
           trigger: document.body,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.3,
+          scrub: 0.2,
         },
       });
 
-      // 3. Hero Parallax & Floating Search Capsule
-      gsap.to(".figma-hero-bg, .hero-video-bg", {
-        yPercent: 20,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".figma-hero-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
-      // 4. Staggered 3D Entrance for Section Headers
+      // 2. Section Headers: Staggered Upward Directional Glide
       const headers = document.querySelectorAll(".figma-section-header, .figma-featured-header");
       headers.forEach((header) => {
         const eyebrow = header.querySelector(".figma-eyebrow");
@@ -113,23 +87,94 @@ const HomePage = () => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: header,
-            start: "top 85%",
+            start: "top 88%",
             toggleActions: "play none none none",
           },
         });
 
         if (eyebrow) {
-          tl.fromTo(eyebrow, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" });
+          tl.fromTo(
+            eyebrow,
+            { opacity: 0, y: 15 },
+            { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }
+          );
         }
         if (title) {
-          tl.fromTo(title, { opacity: 0, y: 25, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power3.out" }, "-=0.4");
+          tl.fromTo(
+            title,
+            { opacity: 0, y: 30, scale: 0.98 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power3.out" },
+            "-=0.4"
+          );
         }
         if (sub) {
-          tl.fromTo(sub, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.4");
+          tl.fromTo(
+            sub,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+            "-=0.4"
+          );
         }
       });
 
-      // 5. Featured Stays 3D Staggered Flip Entrance
+      // 3. Basera Manifesto & Philosophy Entrance (-Y Slide)
+      const manifestoSection = document.querySelector(".basera-manifesto-section");
+      if (manifestoSection) {
+        gsap.fromTo(
+          ".manifesto-headline",
+          { opacity: 0, y: 35 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: manifestoSection,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+        gsap.fromTo(
+          ".manifesto-body-text",
+          { opacity: 0, y: 25 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            delay: 0.15,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: manifestoSection,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // 4. Curated Collections 3D Spatial Lift (Center Zoom + -Y Glide)
+      const collectionsSection = document.querySelector(".curated-collections-section");
+      if (collectionsSection) {
+        gsap.fromTo(
+          collectionsSection,
+          { opacity: 0, y: 45, scale: 0.96 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.95,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: collectionsSection,
+              start: "top 82%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // 5. Featured Stays: Staggered Card Reveals
       const stayCards = document.querySelectorAll(".figma-stays-grid > *");
       if (stayCards.length > 0) {
         gsap.fromTo(
@@ -140,46 +185,10 @@ const HomePage = () => {
             y: 0,
             scale: 1,
             duration: 0.8,
-            stagger: 0.12,
-            ease: "power3.out",
+            stagger: 0.08,
+            ease: "power2.out",
             scrollTrigger: {
               trigger: ".figma-stays-grid",
-              start: "top 82%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
-
-      // 5.5. Basera Manifesto & Philosophy Entrance
-      const manifestoSection = document.querySelector(".basera-manifesto-section");
-      if (manifestoSection) {
-        gsap.fromTo(
-          ".manifesto-content-box",
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: manifestoSection,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-        gsap.fromTo(
-          ".manifesto-pillar-item",
-          { opacity: 0, y: 25 },
-          {
-            opacity: 1,
-            y: 0,
-            stagger: 0.12,
-            duration: 0.75,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: ".manifesto-pillars-grid",
               start: "top 85%",
               toggleActions: "play none none none",
             },
@@ -187,122 +196,70 @@ const HomePage = () => {
         );
       }
 
-      // 6. Curated Collections 3D Spatial Lift
-      const collectionsSection = document.querySelector(".curated-collections-section");
-      if (collectionsSection) {
+      // 6. Explore World: Staggered Destination Circles Slide (-X Arc)
+      const exploreSection = document.querySelector(".explore-world-section");
+      if (exploreSection) {
         gsap.fromTo(
-          collectionsSection,
-          { opacity: 0, y: 50, scale: 0.97 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: collectionsSection,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
-
-      // 7. Beyond The Stay Orbit Wheel & Showcase Reveal
-      const beyondOrbit = document.querySelector(".beyond-orbit-column");
-      const beyondDetail = document.querySelector(".beyond-detail-column");
-      if (beyondOrbit && beyondDetail) {
-        gsap.fromTo(
-          beyondOrbit,
-          { opacity: 0, x: -40, scale: 0.92 },
+          ".destination-circle-item",
+          { opacity: 0, x: -35, scale: 0.9 },
           {
             opacity: 1,
             x: 0,
             scale: 1,
-            duration: 0.9,
+            duration: 0.75,
+            stagger: 0.06,
             ease: "power3.out",
             scrollTrigger: {
-              trigger: ".figma-beyond-section",
-              start: "top 78%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-        gsap.fromTo(
-          beyondDetail,
-          { opacity: 0, x: 40, scale: 0.95 },
-          {
-            opacity: 1,
-            x: 0,
-            scale: 1,
-            duration: 0.9,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: ".figma-beyond-section",
-              start: "top 78%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
-
-      // 8. Moments in Sanctuary Festoon Light Sway Scrub
-      const jhalarSection = document.querySelector(".figma-how-section");
-      if (jhalarSection) {
-        gsap.fromTo(
-          ".jhalar-festoon-stage",
-          { opacity: 0, y: 35 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: jhalarSection,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
-
-      // 9. Host Atelier Parallax Card
-      const hostCard = document.querySelector(".host-atelier-card");
-      if (hostCard) {
-        gsap.fromTo(
-          hostCard,
-          { opacity: 0, y: 45, scale: 0.97 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.9,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: hostCard,
+              trigger: exploreSection,
               start: "top 82%",
               toggleActions: "play none none none",
             },
           }
         );
-        // Photo parallax scrub inside host card
-        gsap.to(".host-hero-photo", {
-          yPercent: -8,
-          ease: "none",
-          scrollTrigger: {
-            trigger: hostCard,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
       }
 
-      // 10. Basera Gazette Magazine 3D Tilt Scroll Scrub
-      const gazetteCard = document.querySelector(".gazette-card");
-      if (gazetteCard) {
+      // 7. Beyond The Stay: Dual Directional Glide (-X from Left, +X from Right)
+      const beyondSection = document.querySelector(".figma-beyond-section");
+      if (beyondSection) {
         gsap.fromTo(
-          gazetteCard,
+          ".beyond-orbit-column",
+          { opacity: 0, x: -50, scale: 0.94 },
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: beyondSection,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+        gsap.fromTo(
+          ".beyond-detail-column",
+          { opacity: 0, x: 50, scale: 0.95 },
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: beyondSection,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // 8. Moments in Sanctuary (Festoon String Lights)
+      const jhalarSection = document.querySelector(".figma-how-section");
+      if (jhalarSection) {
+        gsap.fromTo(
+          ".jhalar-festoon-stage",
           { opacity: 0, y: 40 },
           {
             opacity: 1,
@@ -310,29 +267,86 @@ const HomePage = () => {
             duration: 0.9,
             ease: "power3.out",
             scrollTrigger: {
-              trigger: gazetteCard,
+              trigger: jhalarSection,
+              start: "top 82%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // 9. Host Atelier: Dual Lateral Reveal (-X Left Atelier, +X Right Photo)
+      const hostSection = document.querySelector(".figma-host-section");
+      if (hostSection) {
+        gsap.fromTo(
+          ".host-atelier-left",
+          { opacity: 0, x: -45 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: hostSection,
               start: "top 82%",
               toggleActions: "play none none none",
             },
           }
         );
         gsap.fromTo(
-          ".magazine-cover-card",
-          { transform: "perspective(1000px) rotateY(-18deg) rotateX(8deg) scale(0.92)" },
+          ".host-atelier-right",
+          { opacity: 0, x: 45 },
           {
-            transform: "perspective(1000px) rotateY(-4deg) rotateX(1deg) scale(1)",
-            ease: "none",
+            opacity: 1,
+            x: 0,
+            duration: 0.9,
+            ease: "power3.out",
             scrollTrigger: {
-              trigger: gazetteCard,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1.2,
+              trigger: hostSection,
+              start: "top 82%",
+              toggleActions: "play none none none",
             },
           }
         );
       }
 
-      // 11. Magnetic Cursor Pull on Luxury CTA Buttons
+      // 10. Basera Gazette: Dual Slide (-X Newsletter Box, +X 3D Magazine Cover)
+      const gazetteSection = document.querySelector(".figma-newsletter-section");
+      if (gazetteSection) {
+        gsap.fromTo(
+          ".gazette-left-content",
+          { opacity: 0, x: -45 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: gazetteSection,
+              start: "top 82%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+        gsap.fromTo(
+          ".gazette-right-visual",
+          { opacity: 0, x: 45, transform: "perspective(1000px) rotateY(-10deg)" },
+          {
+            opacity: 1,
+            x: 0,
+            transform: "perspective(1000px) rotateY(-2deg)",
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: gazetteSection,
+              start: "top 82%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // 11. Magnetic Cursor Physics on Action Buttons
       const magneticBtns = document.querySelectorAll(
         ".figma-view-all-btn, .host-primary-cta, .gazette-submit-btn, .square-primary-btn, .figma-spotlight-btn"
       );
@@ -366,8 +380,6 @@ const HomePage = () => {
 
     return () => {
       ctx.revert();
-      gsap.ticker.remove(updateLenis);
-      lenis.destroy();
     };
   }, [listings]);
 
