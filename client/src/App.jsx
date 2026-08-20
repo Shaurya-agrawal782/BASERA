@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SmoothScrollProvider from "./components/SmoothScroll";
-import ScrollToTop from "./components/ScrollToTop";
 
 // Route Code-Splitting via React.lazy
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -182,7 +181,6 @@ function App() {
         </Suspense>
       </main>
       <Footer />
-      <ScrollToTop />
     </SmoothScrollProvider>
   );
 }

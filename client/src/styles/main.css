@@ -173,7 +173,7 @@ h6 {
 }
 
 /* ==========================================================================
-   1. CRISP WHITE LUXURY NAVBAR (MATCHING REFERENCE AESTHETIC)
+   1. LUMINOUS LIGHT ALABASTER NAVBAR
    ========================================================================== */
 .basera-navbar-wrapper {
   position: fixed;
@@ -185,12 +185,13 @@ h6 {
   height: 74px;
   display: flex;
   align-items: center;
-  background: #FFFFFF;
-  border-bottom: 1px solid #E5E7EB;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  background: #FAF9F6;
+  border-bottom: 1px solid #EFECE6;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
   pointer-events: auto;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     background 0.25s ease,
+    border-color 0.25s ease,
     box-shadow 0.25s ease;
 }
 
@@ -204,16 +205,17 @@ h6 {
 }
 
 .basera-navbar-wrapper.at-top {
-  background: #FFFFFF;
-  border-bottom: 1px solid #E5E7EB;
+  background: #FAF9F6;
+  background-image: linear-gradient(180deg, #FDFDFB 0%, #FAF9F6 100%);
+  border-bottom: 1px solid #EFECE6;
 }
 
 .basera-navbar-wrapper.scrolled {
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(251, 250, 248, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid #E5E7EB;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid #EFECE6;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 /* Wide Grid Layout Matching All Page Sections */
@@ -312,7 +314,7 @@ h6 {
 .basera-nav-divider {
   width: 1px;
   height: 20px;
-  background: #E5E7EB;
+  background: #EFECE6;
 }
 
 /* Auth Sign In */
@@ -347,17 +349,17 @@ h6 {
   gap: 0.65rem;
   padding: 0.35rem 0.95rem 0.35rem 0.4rem;
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #EFECE6;
   border-radius: 9999px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .basera-profile-trigger-btn:hover,
 .basera-profile-trigger-btn.active {
-  border-color: #111827;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border-color: #D97706;
+  box-shadow: 0 4px 18px rgba(217, 119, 6, 0.16);
   transform: translateY(-1px);
 }
 
@@ -365,20 +367,31 @@ h6 {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #111827;
-  color: #FFFFFF;
+  background: #FFFFFF;
+  border: 1.5px solid #D97706;
+  color: #D97706;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background 0.2s ease;
+  box-shadow: 0 1px 5px rgba(217, 119, 6, 0.15);
+  transition: all 0.25s ease;
+}
+
+.basera-profile-trigger-btn:hover .profile-avatar-circle,
+.basera-profile-trigger-btn.active .profile-avatar-circle {
+  background: #FEF3C7;
+  border-color: #B45309;
+  color: #B45309;
+  box-shadow: 0 2px 10px rgba(217, 119, 6, 0.3);
+  transform: scale(1.05);
 }
 
 .avatar-initial {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #D97706;
 }
 
 .profile-label-text {
@@ -388,11 +401,21 @@ h6 {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #111827;
+  transition: color 0.2s ease;
+}
+
+.basera-profile-trigger-btn:hover .profile-label-text {
+  color: #B45309;
 }
 
 .profile-chevron {
   color: #6B7280;
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, color 0.2s ease;
+}
+
+.basera-profile-trigger-btn:hover .profile-chevron,
+.basera-profile-trigger-btn.active .profile-chevron {
+  color: #D97706;
 }
 
 .profile-chevron.rotate {
@@ -405,10 +428,11 @@ h6 {
   top: calc(100% + 12px);
   right: 0;
   width: 250px;
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background: #FAF9F6;
+  background-image: linear-gradient(180deg, #FDFDFB 0%, #FAF9F6 100%);
+  border: 1px solid #EFECE6;
   border-radius: 16px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
   padding: 0.85rem;
   z-index: 1100;
 }
@@ -422,17 +446,19 @@ h6 {
 }
 
 .dropdown-avatar-lg {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: #111827;
-  color: #FFFFFF;
+  background: #FEF3C7;
+  border: 1.5px solid #D97706;
+  color: #D97706;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.15);
 }
 
 .dropdown-user-info {
@@ -480,7 +506,7 @@ h6 {
 
 .dropdown-separator {
   height: 1px;
-  background: #E5E7EB;
+  background: #E6E4DF;
   margin: 0.4rem 0;
 }
 
@@ -488,7 +514,7 @@ h6 {
 .dropdown-menu-list {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.35rem;
 }
 
 .dropdown-menu-item {
@@ -511,18 +537,24 @@ h6 {
 }
 
 .dropdown-menu-item:hover {
-  background: #F3F4F6;
+  background: #EFECE6;
   color: #111827;
 }
 
 .dropdown-menu-item.primary-action {
-  background: #111827;
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
   color: #FFFFFF;
+  border: 1px solid #D97706;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.25);
+  font-weight: 700;
 }
 
 .dropdown-menu-item.primary-action:hover {
-  background: #000000;
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
   color: #FFFFFF;
+  border-color: #F59E0B;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+  transform: translateY(-1px);
 }
 
 .dropdown-menu-item.logout-item {
@@ -1008,27 +1040,68 @@ h6 {
 
 .figma-collection-card {
   position: relative;
-  height: clamp(280px, 30vw, 380px);
-  border-radius: var(--radius-xl);
+  height: clamp(320px, 32vw, 420px);
+  border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.figma-collection-img {
+.figma-collection-img,
+.figma-collection-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.figma-collection-card:hover .figma-collection-img {
-  transform: scale(1.05);
+.figma-collection-card:hover .figma-collection-img,
+.figma-collection-card:hover .figma-collection-video {
+  transform: scale(1.06);
 }
 
 .figma-collection-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.75) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0.85) 100%);
+  transition: background 0.3s ease;
+  z-index: 1;
+}
+
+.figma-collection-card:hover .figma-collection-overlay {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.88) 100%);
+}
+
+.figma-collection-top-badge {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.8rem;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 9999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.badge-live-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #F59E0B;
+  box-shadow: 0 0 8px #F59E0B;
+  animation: pulseLiveDot 2.2s infinite ease-in-out;
 }
 
 .figma-collection-meta {
@@ -1037,23 +1110,45 @@ h6 {
   left: 1.5rem;
   right: 1.5rem;
   color: #FFFFFF;
+  z-index: 2;
+}
+
+.figma-collection-tagline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #F59E0B;
+  display: block;
+  margin-bottom: 0.35rem;
 }
 
 .figma-collection-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
   font-weight: 400;
   color: #FFFFFF;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.4rem;
+  line-height: 1.2;
 }
 
 .figma-collection-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.45rem;
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+}
+
+.collection-arrow-icon {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #F59E0B;
+}
+
+.figma-collection-card:hover .collection-arrow-icon {
+  transform: translateX(4px);
 }
 
 @media (max-width: 900px) {
@@ -1070,7 +1165,7 @@ h6 {
   }
 
   .figma-collection-card {
-    height: 260px;
+    height: 280px;
   }
 }
 
@@ -1379,54 +1474,126 @@ h6 {
 }
 
 /* ==========================================================================
-   6. EXPLORE THE WORLD (CIRCLES - RESPONSIVE)
+   6. EXPLORE THE WORLD (GSAP CONTINUOUS MARQUEE - RESPONSIVE)
    ========================================================================== */
 .figma-explore-section {
-  padding: clamp(3.5rem, 6vw, 6rem) 0;
+  padding: clamp(4rem, 6.5vw, 6.5rem) 0;
   background: #FFFFFF;
+  overflow: hidden;
+  position: relative;
 }
 
-.figma-circles-row {
+.explore-marquee-viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: clamp(2.5rem, 4vw, 3.5rem);
+  padding: 1.25rem 0 1.75rem 0;
+  cursor: grab;
+}
+
+.explore-marquee-viewport:active {
+  cursor: grabbing;
+}
+
+.explore-edge-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(40px, 8vw, 120px);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.explore-edge-fade.left {
+  left: 0;
+  background: linear-gradient(to right, #FFFFFF 20%, transparent 100%);
+}
+
+.explore-edge-fade.right {
+  right: 0;
+  background: linear-gradient(to left, #FFFFFF 20%, transparent 100%);
+}
+
+.explore-marquee-track {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: clamp(1.5rem, 3.5vw, 3rem);
-  margin-top: clamp(2rem, 3.5vw, 3.5rem);
-  flex-wrap: wrap;
+  gap: clamp(2.5rem, 4vw, 4rem);
+  width: max-content;
+  will-change: transform;
 }
 
 .figma-circle-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
   cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.figma-circle-card:hover {
+  transform: translateY(-8px);
 }
 
 .figma-circle-wrapper {
-  width: clamp(75px, 12vw, 110px);
-  height: clamp(75px, 12vw, 110px);
+  width: clamp(120px, 12vw, 160px);
+  height: clamp(120px, 12vw, 160px);
   border-radius: 50%;
+  padding: 4px;
+  background: #FFFFFF;
+  border: 2px solid #E6E4DF;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.figma-circle-card:hover .figma-circle-wrapper {
+  border-color: #D97706;
+  box-shadow: 0 16px 36px rgba(217, 119, 6, 0.22);
 }
 
 .figma-circle-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  border-radius: 50%;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .figma-circle-card:hover .figma-circle-img {
   transform: scale(1.1);
 }
 
+.figma-circle-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-align: center;
+}
+
 .figma-circle-name {
   font-family: var(--font-serif);
-  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-size: clamp(1.1rem, 1.4vw, 1.25rem);
   font-weight: 500;
   color: var(--text-dark);
+  transition: color 0.2s ease;
+}
+
+.figma-circle-card:hover .figma-circle-name {
+  color: #B45309;
+}
+
+.figma-circle-region {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9CA3AF;
 }
 
 /* ==========================================================================
@@ -1823,112 +1990,219 @@ h6 {
 }
 
 /* ==========================================================================
-   12. FOOTER (RESPONSIVE)
+   12. ULTRA-LUXURY BASERA EDITORIAL FOOTER (WARM ALABASTER LIGHT AESTHETIC)
    ========================================================================== */
+.basera-luxury-footer,
 .figma-footer {
-  background: #111827;
-  color: #9CA3AF;
-  padding: clamp(3.5rem, 5vw, 5rem) 0 2.5rem 0;
+  background: #F8F7F4;
+  background-image: linear-gradient(180deg, #FBFBF9 0%, #F5F4EF 100%);
+  color: #4B5563;
   margin-top: auto;
-  border-top: 1px solid #1F2937;
+  border-top: 1px solid #E6E4DF;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-.figma-footer-grid {
+/* Subtle top hairline gold accent */
+.basera-luxury-footer::before,
+.figma-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(800px, 75%);
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.35), rgba(217, 119, 6, 0.7), rgba(217, 119, 6, 0.35), transparent);
+  pointer-events: none;
+}
+
+/* --- Main 5-Column Editorial Grid --- */
+.basera-footer-main-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-  gap: clamp(2rem, 3.5vw, 3rem);
-  padding-bottom: 3rem;
-  border-bottom: 1px solid #1F2937;
+  grid-template-columns: 2.3fr 1.15fr 1.15fr 1.15fr 1.15fr;
+  gap: clamp(2rem, 3.5vw, 3.5rem);
+  padding: clamp(5.5rem, 8vw, 7.5rem) 0 clamp(4rem, 6.5vw, 5.5rem) 0;
+  border-bottom: 1px solid #E6E4DF;
 }
 
-.figma-footer-logo {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #FFFFFF;
-  display: block;
-  margin-bottom: 0.75rem;
+.basera-footer-col-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.figma-footer-brand-text {
+.footer-logo-wrap {
+  margin-bottom: 1.25rem;
+  display: inline-block;
+}
+
+.footer-logo-wrap .basera-artistic-wordmark {
+  height: 36px;
+  width: auto;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.06));
+}
+
+.basera-footer-bio {
   font-size: 0.88rem;
-  line-height: 1.65;
-  max-width: 280px;
-  color: #9CA3AF;
+  line-height: 1.7;
+  color: #4B5563;
+  max-width: 320px;
 }
 
-.figma-footer-header {
-  font-size: 0.72rem;
+/* Columns & Links */
+.basera-footer-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.basera-footer-col-heading {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #FFFFFF;
-  margin-bottom: 1.25rem;
+  color: #111827;
+  margin-bottom: 1.35rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
 }
 
-.figma-footer-links {
+.basera-footer-col-heading::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #D97706;
+  opacity: 0.85;
+}
+
+.basera-footer-link-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.8rem;
 }
 
-.figma-footer-links a {
-  font-size: 0.88rem;
-  color: #9CA3AF;
-  transition: color 0.2s ease;
+.basera-footer-link-list li a {
+  font-size: 0.86rem;
+  color: #4B5563;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
 }
 
-.figma-footer-links a:hover {
-  color: #FFFFFF;
+.basera-footer-link-list li a:hover {
+  color: #B45309;
+  transform: translateX(4px);
 }
 
-.figma-footer-bottom {
+/* --- Luxury Bottom Bar --- */
+.basera-footer-bottom-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 2rem;
-  font-size: 0.82rem;
+  padding: clamp(2.5rem, 3.5vw, 3.25rem) 0 clamp(2.75rem, 4vw, 3.75rem) 0;
+  font-size: 0.8rem;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-.figma-footer-copy {
+.basera-footer-copyright {
   color: #6B7280;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  font-weight: 500;
 }
 
-.figma-footer-socials {
+.footer-locale-pills {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  color: #9CA3AF;
+  gap: 0.6rem;
 }
 
-.figma-footer-socials a:hover {
-  color: #FFFFFF;
+.footer-locale-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 9999px;
+  color: #1F2937;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
 }
 
-@media (max-width: 1024px) {
-  .figma-footer-grid {
+.footer-locale-btn:hover {
+  background: #FFFFFF;
+  border-color: #D97706;
+  color: #B45309;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.12);
+  transform: translateY(-1px);
+}
+
+.basera-footer-social-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.social-icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  color: #4B5563;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.social-icon-circle:hover {
+  background: #FEF3C7;
+  border-color: #D97706;
+  color: #B45309;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.18);
+}
+
+/* --- Responsive Adaptations --- */
+@media (max-width: 1080px) {
+  .basera-footer-main-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .figma-footer-brand-col {
+  .basera-footer-col-brand {
     grid-column: span 3;
+    margin-bottom: 1rem;
   }
 }
 
 @media (max-width: 640px) {
-  .figma-footer-grid {
+  .basera-footer-main-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem 1.25rem;
+    gap: 2rem 1.5rem;
   }
 
-  .figma-footer-brand-col {
+  .basera-footer-col-brand {
     grid-column: span 2;
   }
 
-  .figma-footer-bottom {
+  .basera-footer-bottom-bar {
     flex-direction: column;
     align-items: center;
     text-align: center;
