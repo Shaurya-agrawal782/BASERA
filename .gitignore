@@ -1,8 +1,11 @@
 # Dependencies
 node_modules/
+client/node_modules/
+server/node_modules/
 frontend/node_modules/
 
 # Production builds
+client/dist/
 frontend/dist/
 dist/
 
@@ -10,6 +13,9 @@ dist/
 .env
 .env.local
 .env.production
+server/.env
+server/.env.local
+server/.env.production
 
 # Logs & Cache
 npm-debug.log*

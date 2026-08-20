@@ -1,5 +1,7 @@
+const path = require("path");
 if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
+  require("dotenv").config({ path: path.join(__dirname, ".env") });
+  require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
 }
 
 const express = require("express");
@@ -121,12 +123,12 @@ async function startServer() {
   app.use("/api/listings/:id/reviews", reviewRouter);
   app.use("/api/users", userRouter);
 
-  // Serve frontend build in production
-  const frontendDist = path.join(__dirname, "frontend", "dist");
-  app.use(express.static(frontendDist));
+  // Serve client build in production
+  const clientDist = path.join(__dirname, "..", "client", "dist");
+  app.use(express.static(clientDist));
 
   app.get(/^\/(?!api).*/, (req, res, next) => {
-    const indexHtml = path.join(frontendDist, "index.html");
+    const indexHtml = path.join(clientDist, "index.html");
     const fs = require("fs");
     if (fs.existsSync(indexHtml)) {
       return res.sendFile(indexHtml);
