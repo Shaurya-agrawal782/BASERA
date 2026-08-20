@@ -236,12 +236,7 @@ const CinematicPreloader = ({ onComplete }) => {
       <div className="preloader-dust-particles" />
 
       {/* Top Header Utilities */}
-      <div className="preloader-top-bar">
-        <div className="preloader-brand-badge">
-          <Sparkles size={13} className="text-amber-400" />
-          <span>BASERA ARCHITECTURAL CINEMA</span>
-        </div>
-
+      <div className="preloader-top-bar" style={{ justifyContent: "flex-end" }}>
         <div className="preloader-top-actions">
           <button
             type="button"
@@ -256,15 +251,6 @@ const CinematicPreloader = ({ onComplete }) => {
           >
             {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
             <span>{isMuted ? "AUDIO OFF" : "AUDIO ON"}</span>
-          </button>
-
-          <button
-            type="button"
-            className="preloader-skip-btn"
-            onClick={handleFinish}
-          >
-            <span>ENTER ATELIER</span>
-            <ArrowRight size={14} />
           </button>
         </div>
       </div>
