@@ -40,14 +40,15 @@ const CinematicPreloader = ({ onComplete }) => {
   const [showPreloader, setShowPreloader] = useState(true);
 
   const containerRef = useRef(null);
+  const centerStageRef = useRef(null);
   const videoRef = useRef(null);
-  const lettersRef = useRef([]);
   const flareRef = useRef(null);
   const numberRef = useRef(null);
   const progressFillRef = useRef(null);
   const statusRef = useRef(null);
   const audioCtxRef = useRef(null);
   const intervalRef = useRef(null);
+  const animFrameRef = useRef(null);
   const isFinishedRef = useRef(false);
 
   // Synthesize Cinematic Sound FX using Web Audio API
@@ -64,14 +65,14 @@ const CinematicPreloader = ({ onComplete }) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = "sine";
-        osc.frequency.setValueAtTime(900 + Math.random() * 300, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.04);
-        gain.gain.setValueAtTime(0.06, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+        osc.frequency.setValueAtTime(950 + Math.random() * 200, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.03);
+        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03);
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start();
-        osc.stop(ctx.currentTime + 0.05);
+        osc.stop(ctx.currentTime + 0.04);
       } else if (type === "chord") {
         const freqs = [130.81, 164.81, 196.0, 246.94, 293.66, 392.0, 523.25];
         freqs.forEach((f, idx) => {
@@ -80,12 +81,12 @@ const CinematicPreloader = ({ onComplete }) => {
           osc.type = idx % 2 === 0 ? "sine" : "triangle";
           osc.frequency.setValueAtTime(f, ctx.currentTime);
           gain.gain.setValueAtTime(0, ctx.currentTime);
-          gain.gain.linearRampToValueAtTime(0.05 / (idx + 1), ctx.currentTime + 0.9);
-          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 3.5);
+          gain.gain.linearRampToValueAtTime(0.06 / (idx + 1), ctx.currentTime + 0.8);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 3.8);
           osc.connect(gain);
           gain.connect(ctx.destination);
           osc.start();
-          osc.stop(ctx.currentTime + 3.6);
+          osc.stop(ctx.currentTime + 3.9);
         });
       }
     } catch (e) {}
@@ -95,6 +96,9 @@ const CinematicPreloader = ({ onComplete }) => {
     if (isFinishedRef.current) return;
     isFinishedRef.current = true;
     clearInterval(intervalRef.current);
+    if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+
+    playCinematicSound("chord");
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -103,31 +107,35 @@ const CinematicPreloader = ({ onComplete }) => {
       },
     });
 
-    // Marvel Golden Flare Explosion & Curtain Shutter Reveal
+    // 1. Golden Flare Sweep & Champagne Glow
     tl.to(flareRef.current, {
       opacity: 1,
-      scaleX: 3,
+      scaleX: 3.2,
       duration: 0.7,
-      ease: "power2.out",
+      ease: "power3.out",
     })
-      .to(".preloader-logo-wrap", {
-        scale: 1.1,
-        letterSpacing: "0.25em",
-        duration: 0.8,
-        ease: "power3.out",
-      }, "-=0.5")
+      // 2. Cinematic Center Stage Dissolve & Scale Forward
+      .to(centerStageRef.current, {
+        scale: 1.06,
+        opacity: 0,
+        filter: "blur(6px)",
+        duration: 0.9,
+        ease: "power3.inOut",
+      }, "-=0.3")
+      // 3. Staggered Vertical Lacquer Shutter Blade Retraction
       .to(".preloader-shutter-blade", {
         scaleY: 0,
         transformOrigin: (i) => (i % 2 === 0 ? "top" : "bottom"),
-        stagger: 0.07,
-        duration: 1.2,
+        stagger: 0.06,
+        duration: 1.3,
         ease: "power4.inOut",
-      }, "+=0.1")
+      }, "-=0.6")
+      // 4. Smooth Fade of root container
       .to(containerRef.current, {
         opacity: 0,
-        duration: 0.4,
+        duration: 0.5,
         ease: "power2.inOut",
-      }, "-=0.4");
+      }, "-=0.5");
   };
 
   useEffect(() => {
@@ -143,78 +151,86 @@ const CinematicPreloader = ({ onComplete }) => {
       }
     }, 85);
 
-    // 2. GSAP Ultra-Smooth Hardware-Accelerated Counter Timeline (120fps direct DOM updates)
-    const masterTl = gsap.timeline({
-      onComplete: handleFinish,
-    });
+    // 2. Video-Synchronized Ultra-Fluid Odometer Engine (120fps lerp)
+    let currentPercent = 0;
+    let targetPercent = 0;
+    let lastRenderedFloor = -1;
+    const startTime = performance.now();
+    const TARGET_DURATION = 6200; // 6.2s total build
 
-    const counterObj = { val: 0 };
-    let lastRenderedVal = -1;
+    const updateOdometer = (now) => {
+      if (isFinishedRef.current) return;
 
-    masterTl.to(counterObj, {
-      val: 100,
-      duration: 6.0,
-      ease: "power1.inOut",
-      onUpdate: () => {
-        const currentVal = Math.floor(counterObj.val);
-        if (currentVal !== lastRenderedVal) {
-          lastRenderedVal = currentVal;
-          
-          // Direct DOM updates for ultra-smooth 60/120fps odometer
-          if (numberRef.current) {
-            numberRef.current.textContent = `${currentVal < 10 ? `00${currentVal}` : currentVal < 100 ? `0${currentVal}` : "100"}%`;
-          }
-          if (progressFillRef.current) {
-            progressFillRef.current.style.width = `${counterObj.val}%`;
-          }
-          if (statusRef.current) {
-            const pIdx = Math.min(Math.floor((currentVal / 100) * PHRASES.length), PHRASES.length - 1);
-            statusRef.current.textContent = PHRASES[pIdx];
-          }
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / TARGET_DURATION, 1);
+      // Smooth cubic-bezier acceleration and deceleration curve
+      const eased = progress < 0.5
+        ? 4 * progress * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
 
-          // Switch video reel seamlessly based on progress
-          if (currentVal < 35) {
-            setActiveVideoIdx(0);
-          } else if (currentVal < 70) {
-            setActiveVideoIdx(1);
-          } else {
-            setActiveVideoIdx(2);
-          }
+      targetPercent = eased * 100;
+      currentPercent += (targetPercent - currentPercent) * 0.18;
+
+      const floorVal = Math.floor(currentPercent);
+      if (floorVal !== lastRenderedFloor) {
+        lastRenderedFloor = floorVal;
+
+        if (numberRef.current) {
+          numberRef.current.textContent = `${floorVal < 10 ? `00${floorVal}` : floorVal < 100 ? `0${floorVal}` : "100"}%`;
         }
-      },
-    });
+        if (progressFillRef.current) {
+          progressFillRef.current.style.width = `${currentPercent}%`;
+        }
+        if (statusRef.current) {
+          const pIdx = Math.min(Math.floor((floorVal / 100) * PHRASES.length), PHRASES.length - 1);
+          statusRef.current.textContent = PHRASES[pIdx];
+        }
 
-    // Animate letters appearance
-    masterTl.fromTo(
+        // Seamless video reel transition
+        if (floorVal < 35) {
+          setActiveVideoIdx(0);
+        } else if (floorVal < 70) {
+          setActiveVideoIdx(1);
+        } else {
+          setActiveVideoIdx(2);
+        }
+      }
+
+      if (progress >= 1 && floorVal >= 99) {
+        if (numberRef.current) numberRef.current.textContent = "100%";
+        if (progressFillRef.current) progressFillRef.current.style.width = "100%";
+        handleFinish();
+      } else {
+        animFrameRef.current = requestAnimationFrame(updateOdometer);
+      }
+    };
+
+    animFrameRef.current = requestAnimationFrame(updateOdometer);
+
+    // Initial Letters Fade-In & Subtitle
+    gsap.fromTo(
       ".marvel-char",
       { opacity: 0, y: 35, scale: 0.85 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 1.3,
+        duration: 1.2,
         stagger: 0.1,
         ease: "power3.out",
-      },
-      0.6
+        delay: 0.4,
+      }
     );
 
-    // Golden sound chord at 100%
-    masterTl.call(() => {
-      playCinematicSound("chord");
-    }, null, 5.7);
-
-    // Subtitle reveal
-    masterTl.fromTo(
+    gsap.fromTo(
       ".preloader-tagline-text",
       { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
-      5.8
+      { opacity: 1, y: 0, duration: 1.0, ease: "power2.out", delay: 1.2 }
     );
 
     return () => {
       clearInterval(intervalRef.current);
-      masterTl.kill();
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     };
   }, [isMuted]);
 
@@ -268,7 +284,7 @@ const CinematicPreloader = ({ onComplete }) => {
       </div>
 
       {/* CENTERPIECE: MARVEL-STYLE FLIPBOOK LETTERS */}
-      <div className="preloader-center-stage">
+      <div className="preloader-center-stage" ref={centerStageRef}>
         <div className="preloader-logo-wrap">
           {/* Active Background Film Frame Masked inside Typography */}
           <div

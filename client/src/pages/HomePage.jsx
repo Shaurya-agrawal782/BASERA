@@ -400,10 +400,18 @@ const HomePage = () => {
     }
   };
 
+  const handlePreloaderComplete = () => {
+    gsap.fromTo(
+      ".figma-hero-section",
+      { scale: 1.04, filter: "blur(4px)" },
+      { scale: 1, filter: "blur(0px)", duration: 1.4, ease: "power3.out" }
+    );
+  };
+
   return (
     <div className="figma-homepage-wrapper">
       {/* MARVEL-STYLE OPENING CINEMATIC PRELOADER */}
-      <CinematicPreloader />
+      <CinematicPreloader onComplete={handlePreloaderComplete} />
 
       {/* GOLD TOP SCROLL READING PROGRESS BAR */}
       <div className="basera-scroll-progress-bar" aria-hidden="true"></div>
