@@ -912,9 +912,9 @@ h6 {
   z-index: 20;
   display: inline-flex;
   align-items: center;
-  gap: 1.25rem;
-  padding: 0.55rem 1.35rem;
-  background: rgba(15, 23, 42, 0.7);
+  gap: 0.85rem;
+  padding: 0.45rem 0.95rem;
+  background: rgba(15, 23, 42, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -922,31 +922,6 @@ h6 {
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
   max-width: 92vw;
   cursor: default;
-}
-
-.hero-video-meta-left {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.76rem;
-  color: #FFFFFF;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.hero-location-text {
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 600;
-}
-
-.hero-divider-dot {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.hero-code-badge {
-  color: #F59E0B;
-  font-weight: 700;
 }
 
 .hero-video-dashes {

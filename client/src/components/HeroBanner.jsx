@@ -129,15 +129,6 @@ const HeroBanner = () => {
         className="hero-video-controls-bar"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="hero-video-meta-left">
-          <Sparkles size={13} className="text-amber-400" />
-          <span className="hero-location-text">{currentVideo.location}</span>
-          <span className="hero-divider-dot">·</span>
-          <span className="hero-code-badge">
-            {currentVideo.code} / 0{HERO_VIDEOS.length}
-          </span>
-        </div>
-
         {/* Dash Indicators */}
         <div className="hero-video-dashes">
           {HERO_VIDEOS.map((vid, idx) => (
