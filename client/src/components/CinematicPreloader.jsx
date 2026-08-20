@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { Sparkles, Volume2, VolumeX, ArrowRight } from "lucide-react";
+import { Volume2, VolumeX } from "lucide-react";
 
 // The 3 AI-generated cinematic preloader video reels
 const PRELOADER_VIDEOS = [
@@ -34,10 +34,8 @@ const PHRASES = [
 ];
 
 const CinematicPreloader = ({ onComplete }) => {
-  const [percent, setPercent] = useState(0);
   const [currentFrame, setCurrentFrame] = useState(0);
   const [activeVideoIdx, setActiveVideoIdx] = useState(0);
-  const [phraseIndex, setPhraseIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [showPreloader, setShowPreloader] = useState(true);
 
@@ -45,6 +43,9 @@ const CinematicPreloader = ({ onComplete }) => {
   const videoRef = useRef(null);
   const lettersRef = useRef([]);
   const flareRef = useRef(null);
+  const numberRef = useRef(null);
+  const progressFillRef = useRef(null);
+  const statusRef = useRef(null);
   const audioCtxRef = useRef(null);
   const intervalRef = useRef(null);
   const isFinishedRef = useRef(false);
@@ -129,17 +130,6 @@ const CinematicPreloader = ({ onComplete }) => {
       }, "-=0.4");
   };
 
-  // Switch between the 3 AI cinematic clips as counter advances
-  useEffect(() => {
-    if (percent < 35) {
-      setActiveVideoIdx(0);
-    } else if (percent < 70) {
-      setActiveVideoIdx(1);
-    } else {
-      setActiveVideoIdx(2);
-    }
-  }, [percent]);
-
   useEffect(() => {
     // 1. Marvel-style rapid film frame flipping inside letters
     let frameIdx = 0;
@@ -153,22 +143,44 @@ const CinematicPreloader = ({ onComplete }) => {
       }
     }, 85);
 
-    // 2. GSAP Master Timeline (8 seconds total epic build)
+    // 2. GSAP Ultra-Smooth Hardware-Accelerated Counter Timeline (120fps direct DOM updates)
     const masterTl = gsap.timeline({
       onComplete: handleFinish,
     });
 
     const counterObj = { val: 0 };
+    let lastRenderedVal = -1;
 
     masterTl.to(counterObj, {
       val: 100,
-      duration: 6.2,
-      ease: "power2.inOut",
+      duration: 6.0,
+      ease: "power1.inOut",
       onUpdate: () => {
-        const rounded = Math.floor(counterObj.val);
-        setPercent(rounded);
-        const pIdx = Math.min(Math.floor((rounded / 100) * PHRASES.length), PHRASES.length - 1);
-        setPhraseIndex(pIdx);
+        const currentVal = Math.floor(counterObj.val);
+        if (currentVal !== lastRenderedVal) {
+          lastRenderedVal = currentVal;
+          
+          // Direct DOM updates for ultra-smooth 60/120fps odometer
+          if (numberRef.current) {
+            numberRef.current.textContent = `${currentVal < 10 ? `00${currentVal}` : currentVal < 100 ? `0${currentVal}` : "100"}%`;
+          }
+          if (progressFillRef.current) {
+            progressFillRef.current.style.width = `${counterObj.val}%`;
+          }
+          if (statusRef.current) {
+            const pIdx = Math.min(Math.floor((currentVal / 100) * PHRASES.length), PHRASES.length - 1);
+            statusRef.current.textContent = PHRASES[pIdx];
+          }
+
+          // Switch video reel seamlessly based on progress
+          if (currentVal < 35) {
+            setActiveVideoIdx(0);
+          } else if (currentVal < 70) {
+            setActiveVideoIdx(1);
+          } else {
+            setActiveVideoIdx(2);
+          }
+        }
       },
     });
 
@@ -190,14 +202,14 @@ const CinematicPreloader = ({ onComplete }) => {
     // Golden sound chord at 100%
     masterTl.call(() => {
       playCinematicSound("chord");
-    }, null, 5.8);
+    }, null, 5.7);
 
     // Subtitle reveal
     masterTl.fromTo(
       ".preloader-tagline-text",
       { opacity: 0, y: 15 },
       { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
-      5.9
+      5.8
     );
 
     return () => {
@@ -292,16 +304,19 @@ const CinematicPreloader = ({ onComplete }) => {
         {/* Precision Progress Odometer & Gauge */}
         <div className="preloader-odometer-box">
           <div className="preloader-counter-row">
-            <span className="preloader-status-msg">{PHRASES[phraseIndex]}</span>
-            <span className="preloader-number-val">
-              {percent < 10 ? `00${percent}` : percent < 100 ? `0${percent}` : "100"}%
+            <span className="preloader-status-msg" ref={statusRef}>
+              INITIALIZING ARCHITECTURAL ATELIER...
+            </span>
+            <span className="preloader-number-val" ref={numberRef}>
+              000%
             </span>
           </div>
 
           <div className="preloader-progress-track">
             <div
               className="preloader-progress-bar"
-              style={{ width: `${percent}%` }}
+              ref={progressFillRef}
+              style={{ width: "0%" }}
             />
           </div>
         </div>
