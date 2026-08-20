@@ -5,6 +5,7 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import API from "../api/client";
+import CinematicPreloader from "../components/CinematicPreloader";
 import HeroBanner from "../components/HeroBanner";
 import PressSection from "../components/PressSection";
 import ManifestoSection from "../components/ManifestoSection";
@@ -401,6 +402,9 @@ const HomePage = () => {
 
   return (
     <div className="figma-homepage-wrapper">
+      {/* MARVEL-STYLE OPENING CINEMATIC PRELOADER */}
+      <CinematicPreloader />
+
       {/* GOLD TOP SCROLL READING PROGRESS BAR */}
       <div className="basera-scroll-progress-bar" aria-hidden="true"></div>
 
