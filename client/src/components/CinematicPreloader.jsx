@@ -2,7 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Sparkles, Volume2, VolumeX, ArrowRight } from "lucide-react";
 
-// Curated 4K Marvel-style flipping architectural film frames
+// The 3 AI-generated cinematic preloader video reels
+const PRELOADER_VIDEOS = [
+  "/preloader/preload.mp4",
+  "/preloader/preload2.mp4",
+  "/preloader/preload3.mp4",
+];
+
+// High-speed Marvel flipbook architectural stills
 const FILM_FRAMES = [
   "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=2000&q=95",
   "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=2000&q=95",
@@ -19,28 +26,30 @@ const FILM_FRAMES = [
 ];
 
 const PHRASES = [
-  "INITIALIZING SANCTUARIES...",
-  "ARCHITECTURAL PROVENANCE...",
-  "CURATING SENSORY STILLNESS...",
-  "DISCREET ATELIER PORTFOLIO...",
-  "ARRIVING AT SERENITY...",
+  "INITIALIZING ARCHITECTURAL ATELIER...",
+  "PROVENANCE & ACOUSTIC TRANQUILITY...",
+  "CURATING SENSORY LIVING...",
+  "DISCREET GLOBAL SANCTUARIES...",
+  "ARRIVING AT STILLNESS...",
 ];
 
 const CinematicPreloader = ({ onComplete }) => {
   const [percent, setPercent] = useState(0);
   const [currentFrame, setCurrentFrame] = useState(0);
+  const [activeVideoIdx, setActiveVideoIdx] = useState(0);
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [showPreloader, setShowPreloader] = useState(true);
 
   const containerRef = useRef(null);
+  const videoRef = useRef(null);
   const lettersRef = useRef([]);
   const flareRef = useRef(null);
   const audioCtxRef = useRef(null);
   const intervalRef = useRef(null);
   const isFinishedRef = useRef(false);
 
-  // Synthesize Cinematic Ambient Sounds using Web Audio API
+  // Synthesize Cinematic Sound FX using Web Audio API
   const playCinematicSound = (type) => {
     if (isMuted) return;
     try {
@@ -51,38 +60,34 @@ const CinematicPreloader = ({ onComplete }) => {
       if (ctx.state === "suspended") ctx.resume();
 
       if (type === "tick") {
-        // Shutter film tick
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = "sine";
-        osc.frequency.setValueAtTime(800 + Math.random() * 400, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.04);
-        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        osc.frequency.setValueAtTime(900 + Math.random() * 300, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.06, ctx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start();
         osc.stop(ctx.currentTime + 0.05);
       } else if (type === "chord") {
-        // Grand celestial golden chord
-        const freqs = [130.81, 164.81, 196.0, 246.94, 293.66, 392.0]; // Cmaj9 swell
+        const freqs = [130.81, 164.81, 196.0, 246.94, 293.66, 392.0, 523.25];
         freqs.forEach((f, idx) => {
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
           osc.type = idx % 2 === 0 ? "sine" : "triangle";
           osc.frequency.setValueAtTime(f, ctx.currentTime);
           gain.gain.setValueAtTime(0, ctx.currentTime);
-          gain.gain.linearRampToValueAtTime(0.06 / (idx + 1), ctx.currentTime + 0.8);
-          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 3.2);
+          gain.gain.linearRampToValueAtTime(0.05 / (idx + 1), ctx.currentTime + 0.9);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 3.5);
           osc.connect(gain);
           gain.connect(ctx.destination);
           osc.start();
-          osc.stop(ctx.currentTime + 3.3);
+          osc.stop(ctx.currentTime + 3.6);
         });
       }
-    } catch (e) {
-      // Audio not permitted without gesture
-    }
+    } catch (e) {}
   };
 
   const handleFinish = () => {
@@ -97,26 +102,26 @@ const CinematicPreloader = ({ onComplete }) => {
       },
     });
 
-    // Animate Marvel Logo Flash & Flare
+    // Marvel Golden Flare Explosion & Curtain Shutter Reveal
     tl.to(flareRef.current, {
       opacity: 1,
-      scaleX: 2.5,
-      duration: 0.6,
+      scaleX: 3,
+      duration: 0.7,
       ease: "power2.out",
     })
       .to(".preloader-logo-wrap", {
-        scale: 1.08,
-        letterSpacing: "0.22em",
+        scale: 1.1,
+        letterSpacing: "0.25em",
         duration: 0.8,
         ease: "power3.out",
-      }, "-=0.4")
+      }, "-=0.5")
       .to(".preloader-shutter-blade", {
         scaleY: 0,
         transformOrigin: (i) => (i % 2 === 0 ? "top" : "bottom"),
-        stagger: 0.08,
-        duration: 1.1,
+        stagger: 0.07,
+        duration: 1.2,
         ease: "power4.inOut",
-      }, "+=0.2")
+      }, "+=0.1")
       .to(containerRef.current, {
         opacity: 0,
         duration: 0.4,
@@ -124,8 +129,19 @@ const CinematicPreloader = ({ onComplete }) => {
       }, "-=0.4");
   };
 
+  // Switch between the 3 AI cinematic clips as counter advances
   useEffect(() => {
-    // 1. Rapid Marvel Comic-Style Flipbook Sequence inside the letters
+    if (percent < 35) {
+      setActiveVideoIdx(0);
+    } else if (percent < 70) {
+      setActiveVideoIdx(1);
+    } else {
+      setActiveVideoIdx(2);
+    }
+  }, [percent]);
+
+  useEffect(() => {
+    // 1. Marvel-style rapid film frame flipping inside letters
     let frameIdx = 0;
     let tickCount = 0;
     intervalRef.current = setInterval(() => {
@@ -135,19 +151,18 @@ const CinematicPreloader = ({ onComplete }) => {
       if (tickCount % 2 === 0) {
         playCinematicSound("tick");
       }
-    }, 90);
+    }, 85);
 
-    // 2. GSAP Master Timeline for Counter & Marvel Reveal (Total ~8.2s)
+    // 2. GSAP Master Timeline (8 seconds total epic build)
     const masterTl = gsap.timeline({
       onComplete: handleFinish,
     });
 
     const counterObj = { val: 0 };
 
-    // Act 1: Initial Counter build (0 -> 100%)
     masterTl.to(counterObj, {
       val: 100,
-      duration: 5.5,
+      duration: 6.2,
       ease: "power2.inOut",
       onUpdate: () => {
         const rounded = Math.floor(counterObj.val);
@@ -157,32 +172,32 @@ const CinematicPreloader = ({ onComplete }) => {
       },
     });
 
-    // Act 2: Letters Reveal & Rapid Flip acceleration
+    // Animate letters appearance
     masterTl.fromTo(
       ".marvel-char",
-      { opacity: 0, y: 30, scale: 0.9 },
+      { opacity: 0, y: 35, scale: 0.85 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 1.2,
-        stagger: 0.12,
+        duration: 1.3,
+        stagger: 0.1,
         ease: "power3.out",
       },
-      0.8
+      0.6
     );
 
-    // Act 3: Golden chord & Flare lock at 100%
+    // Golden sound chord at 100%
     masterTl.call(() => {
       playCinematicSound("chord");
-    }, null, 5.2);
+    }, null, 5.8);
 
-    // Act 4: Tagline subtitle glide
+    // Subtitle reveal
     masterTl.fromTo(
       ".preloader-tagline-text",
       { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" },
-      5.4
+      { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
+      5.9
     );
 
     return () => {
@@ -202,10 +217,25 @@ const CinematicPreloader = ({ onComplete }) => {
         ))}
       </div>
 
+      {/* Full-Bleed Atmospheric AI Cinema Video Canvas */}
+      <div className="preloader-ai-video-bg">
+        <video
+          ref={videoRef}
+          key={PRELOADER_VIDEOS[activeVideoIdx]}
+          src={PRELOADER_VIDEOS[activeVideoIdx]}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="preloader-cinema-video"
+        />
+        <div className="preloader-cinema-scrim" />
+      </div>
+
       {/* Floating Golden Stars / Embers Dust */}
       <div className="preloader-dust-particles" />
 
-      {/* Top Header Utilities (Mute Toggle & Skip Button) */}
+      {/* Top Header Utilities */}
       <div className="preloader-top-bar">
         <div className="preloader-brand-badge">
           <Sparkles size={13} className="text-amber-400" />
@@ -242,7 +272,7 @@ const CinematicPreloader = ({ onComplete }) => {
       {/* CENTERPIECE: MARVEL-STYLE FLIPBOOK LETTERS */}
       <div className="preloader-center-stage">
         <div className="preloader-logo-wrap">
-          {/* Active Background Film Frame Masked inside the Typography */}
+          {/* Active Background Film Frame Masked inside Typography */}
           <div
             className="marvel-film-strip-bg"
             style={{
