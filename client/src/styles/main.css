@@ -848,6 +848,19 @@ h6 {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.figma-hero-video.video-active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.figma-hero-video.video-inactive {
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .figma-hero-bg {

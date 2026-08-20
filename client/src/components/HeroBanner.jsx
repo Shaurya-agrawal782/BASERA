@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const HERO_VIDEOS = [
@@ -42,44 +42,97 @@ const HERO_VIDEOS = [
 
 const HeroBanner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const videoRef = useRef(null);
+  const [activeSlot, setActiveSlot] = useState("A"); // "A" or "B"
+  const [srcA, setSrcA] = useState(HERO_VIDEOS[0].src);
+  const [srcB, setSrcB] = useState(HERO_VIDEOS[1].src);
+  const isTransitioningRef = useRef(false);
 
-  // Advance to next video
-  const handleNextVideo = () => {
-    setCurrentIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
-  };
+  const videoRefA = useRef(null);
+  const videoRefB = useRef(null);
 
-  // Play video automatically on index change
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.load();
-      videoRef.current.play().catch((err) => {
-        console.log("Video autoplay initialized:", err);
-      });
+  // Smooth Crossfade to the Next Video
+  const transitionToNext = useCallback(() => {
+    if (isTransitioningRef.current) return;
+    isTransitioningRef.current = true;
+
+    const nextIndex = (currentIndex + 1) % HERO_VIDEOS.length;
+    const nextSrc = HERO_VIDEOS[nextIndex].src;
+
+    if (activeSlot === "A") {
+      // Prepare and crossfade to Slot B
+      setSrcB(nextSrc);
+      if (videoRefB.current) {
+        videoRefB.current.currentTime = 0;
+        videoRefB.current.play().catch(() => {});
+      }
+      setActiveSlot("B");
+    } else {
+      // Prepare and crossfade to Slot A
+      setSrcA(nextSrc);
+      if (videoRefA.current) {
+        videoRefA.current.currentTime = 0;
+        videoRefA.current.play().catch(() => {});
+      }
+      setActiveSlot("A");
     }
-  }, [currentIndex]);
+
+    setCurrentIndex(nextIndex);
+
+    // Release lock after crossfade completes
+    setTimeout(() => {
+      isTransitioningRef.current = false;
+    }, 1200);
+  }, [activeSlot, currentIndex]);
+
+  // Initial playback setup
+  useEffect(() => {
+    if (videoRefA.current) {
+      videoRefA.current.play().catch(() => {});
+    }
+  }, []);
+
+  // Timeupdate listener for 1s pre-end crossfade
+  const handleTimeUpdate = (e) => {
+    const video = e.target;
+    if (video.duration && video.currentTime >= video.duration - 0.8) {
+      transitionToNext();
+    }
+  };
 
   const currentVideo = HERO_VIDEOS[currentIndex];
 
   return (
     <section
       className="figma-hero-section"
-      onClick={handleNextVideo}
-      title="Click anywhere to experience the next sanctuary video"
+      onClick={transitionToNext}
+      title="Click anywhere to seamlessly transition to the next sanctuary"
     >
-      {/* Cinematic Autoplaying Background Video */}
+      {/* Dual Video Buffer Layer for 0-Flicker Cinematic Crossfade */}
       <div className="figma-hero-bg-wrapper">
+        {/* Video Player A */}
         <video
-          ref={videoRef}
-          key={currentVideo.src}
+          ref={videoRefA}
+          src={srcA}
           autoPlay
           muted
           playsInline
-          onEnded={handleNextVideo}
-          className="figma-hero-video"
-        >
-          <source src={currentVideo.src} type="video/mp4" />
-        </video>
+          onTimeUpdate={activeSlot === "A" ? handleTimeUpdate : undefined}
+          onEnded={activeSlot === "A" ? transitionToNext : undefined}
+          className={`figma-hero-video ${activeSlot === "A" ? "video-active" : "video-inactive"}`}
+        />
+
+        {/* Video Player B */}
+        <video
+          ref={videoRefB}
+          src={srcB}
+          autoPlay
+          muted
+          playsInline
+          onTimeUpdate={activeSlot === "B" ? handleTimeUpdate : undefined}
+          onEnded={activeSlot === "B" ? transitionToNext : undefined}
+          className={`figma-hero-video ${activeSlot === "B" ? "video-active" : "video-inactive"}`}
+        />
+
         <div className="figma-hero-overlay"></div>
       </div>
 
@@ -91,7 +144,7 @@ const HeroBanner = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="figma-hero-text-block"
           >
             <span className="figma-hero-eyebrow">
