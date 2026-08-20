@@ -1,0 +1,2282 @@
+/* ==========================================================================
+   BASERA | FIGMA PRODUCTION DESIGN SYSTEM
+   FULLY RESPONSIVE (Mobile 320px -> Ultra-wide 4K)
+   ========================================================================== */
+
+:root {
+  --text-dark: #111827;
+  --text-body: #374151;
+  --text-muted: #6B7280;
+  --text-light: #9CA3AF;
+
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F9FAFB;
+  --bg-dark: #111827;
+
+  --border-subtle: #E5E7EB;
+  --border-light: #F3F4F6;
+
+  --font-serif: "EB Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "EB Garamond", Georgia, serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-float: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* RESET & BASE */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-surface);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-body);
+  background-color: var(--bg-surface);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--text-dark);
+  font-weight: 400;
+}
+
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1.15rem;
+  }
+}
+
+.figma-section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.figma-section-sub {
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  color: var(--text-muted);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.figma-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #B45309;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+/* ==========================================================================
+   1. NAVBAR (RESPONSIVE)
+   ========================================================================== */
+.figma-navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.figma-navbar.scrolled {
+  position: fixed;
+  background: rgba(17, 24, 39, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0.9rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.figma-navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.figma-brand-logo {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.5vw, 1.65rem);
+  font-weight: 500;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.figma-nav-center {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.figma-nav-link {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.2s ease;
+}
+
+.figma-nav-link:hover {
+  color: #FFFFFF;
+}
+
+.figma-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.figma-signin-btn {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.figma-signin-btn:hover {
+  color: #FFFFFF;
+}
+
+.figma-user-label {
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.figma-logout-btn {
+  color: #EF4444;
+  display: flex;
+  align-items: center;
+}
+
+.figma-apply-host-btn {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #111827;
+  background: #FFFFFF;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+}
+
+.figma-apply-host-btn:hover {
+  background: #F3F4F6;
+}
+
+.figma-mobile-toggle-btn {
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+}
+
+.figma-mobile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  background: rgba(17, 24, 39, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #FFFFFF;
+  padding: 1.75rem 1.5rem 2rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.figma-mobile-menu a {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.figma-mobile-menu a:last-of-type {
+  border-bottom: none;
+}
+
+.figma-mobile-host-btn {
+  background: #FFFFFF;
+  color: #111827 !important;
+  text-align: center;
+  padding: 0.75rem !important;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans) !important;
+  font-weight: 700;
+  font-size: 0.95rem !important;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   2. HERO SECTION & SEARCH CAPSULE (RESPONSIVE)
+   ========================================================================== */
+.figma-hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9rem 0 6rem 0;
+  overflow: hidden;
+}
+
+.figma-hero-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.figma-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.figma-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+.figma-hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 1050px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.figma-hero-eyebrow {
+  font-family: var(--font-sans);
+  font-size: clamp(0.68rem, 1vw, 0.78rem);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.25rem;
+}
+
+.figma-hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 6.5vw, 5.2rem);
+  font-weight: 300;
+  color: #FFFFFF;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 3.5rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Floating Search Bar */
+.figma-search-bar {
+  background: #FFFFFF;
+  border-radius: var(--radius-full);
+  padding: 0.5rem 0.6rem 0.5rem 2rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 860px;
+}
+
+.figma-search-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  text-align: left;
+  padding: 0 0.5rem;
+  min-width: 0;
+}
+
+.field-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dark);
+  margin-bottom: 2px;
+}
+
+.field-input {
+  border: none;
+  outline: none;
+  font-size: 0.88rem;
+  color: var(--text-dark);
+  background: transparent;
+  width: 100%;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.field-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.field-placeholder {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-field-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-subtle);
+  margin: 0 0.5rem;
+  flex-shrink: 0;
+}
+
+.figma-search-submit-btn {
+  background: #111827;
+  color: #FFFFFF;
+  border-radius: var(--radius-full);
+  padding: 0.85rem 1.6rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.figma-search-submit-btn:hover {
+  background: #000000;
+}
+
+@media (max-width: 860px) {
+  .figma-hero-section {
+    min-height: 70vh;
+    padding: 7rem 0 4rem 0;
+  }
+  .figma-hero-title {
+    margin-bottom: 2rem;
+  }
+  .figma-search-bar {
+    flex-direction: column;
+    border-radius: var(--radius-xl);
+    padding: 1.25rem 1.25rem 1rem 1.25rem;
+    gap: 0.85rem;
+  }
+  .figma-search-field {
+    width: 100%;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .figma-search-field:last-of-type {
+    border-bottom: none;
+  }
+  .search-field-divider {
+    display: none;
+  }
+  .figma-search-submit-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.95rem;
+    margin-top: 0.25rem;
+  }
+}
+
+/* ==========================================================================
+   3. PRESS STRIP (RESPONSIVE)
+   ========================================================================== */
+.figma-press-section {
+  padding: 2.5rem 0;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+.figma-press-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  display: block;
+  margin-bottom: 1.25rem;
+}
+
+.figma-press-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5rem;
+  flex-wrap: wrap;
+}
+
+.press-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4B5563;
+}
+
+@media (max-width: 768px) {
+  .figma-press-row {
+    gap: 1.75rem 2.25rem;
+  }
+}
+
+/* ==========================================================================
+   4. CURATED COLLECTIONS (RESPONSIVE)
+   ========================================================================== */
+.figma-collections-section {
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
+  background: #FFFFFF;
+}
+
+.figma-collections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  margin-top: clamp(2rem, 3.5vw, 3rem);
+}
+
+.figma-collection-card {
+  position: relative;
+  height: clamp(280px, 30vw, 380px);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.figma-collection-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.figma-collection-card:hover .figma-collection-img {
+  transform: scale(1.05);
+}
+
+.figma-collection-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+.figma-collection-meta {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  color: #FFFFFF;
+}
+
+.figma-collection-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  font-weight: 400;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+}
+
+.figma-collection-link {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .figma-collections-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .figma-collections-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .figma-collection-card {
+    height: 260px;
+  }
+}
+
+/* ==========================================================================
+   5. FEATURED STAYS (RESPONSIVE 2-COLUMN GRID)
+   ========================================================================== */
+.figma-featured-stays-section {
+  padding: clamp(3rem, 5vw, 4.5rem) 0 clamp(4rem, 6vw, 6rem) 0;
+  background: #FFFFFF;
+}
+
+.figma-featured-header {
+  margin-bottom: 1.75rem;
+}
+
+.figma-category-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 2.25rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.figma-category-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.figma-filter-pill {
+  font-family: var(--font-sans);
+  font-size: clamp(0.8rem, 1.1vw, 0.85rem);
+  font-weight: 500;
+  padding: 0.45rem 1.15rem;
+  border-radius: var(--radius-full);
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-dark);
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.figma-filter-pill:hover {
+  border-color: #9CA3AF;
+}
+
+.figma-filter-pill.active {
+  background: #111827;
+  color: #FFFFFF;
+  border-color: #111827;
+}
+
+.figma-active-filter-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.figma-reset-pill-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.figma-stays-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(2rem, 3.5vw, 3rem) clamp(1.25rem, 2.5vw, 2.25rem);
+}
+
+@media (max-width: 768px) {
+  .figma-stays-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card Structure */
+.featured-stay-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.stay-card-link {
+  display: flex;
+  flex-direction: column;
+}
+
+.stay-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--bg-subtle);
+}
+
+.stay-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.featured-stay-card:hover .stay-card-img {
+  transform: scale(1.04);
+}
+
+.stay-wishlist-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.stay-wishlist-btn:hover {
+  transform: scale(1.1);
+  background: #FFFFFF;
+}
+
+.stay-card-info {
+  padding-top: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.stay-row-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.stay-card-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+  font-weight: 500;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stay-rating-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  flex-shrink: 0;
+}
+
+.stay-rating-count {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 0.82rem;
+}
+
+.stay-location-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.stay-row-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.stay-price-box {
+  display: flex;
+  align-items: baseline;
+}
+
+.stay-price-val {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.stay-price-unit {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+
+.stay-tax-pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #059669;
+  background: #ECFDF5;
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--radius-full);
+  margin-left: 6px;
+}
+
+.stay-view-details {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  transition: transform 0.2s ease;
+}
+
+.featured-stay-card:hover .stay-view-details {
+  transform: translateX(2px);
+}
+
+/* Skeleton Loading */
+.figma-skeleton-card {
+  display: flex;
+  flex-direction: column;
+}
+.figma-skeleton-img {
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-xl);
+  background: #E5E7EB;
+  position: relative;
+  overflow: hidden;
+}
+.figma-shimmer {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+.figma-skeleton-text {
+  background: #E5E7EB;
+  border-radius: var(--radius-sm);
+  margin-top: 0.65rem;
+  height: 14px;
+}
+.figma-skeleton-text.title { width: 60%; height: 20px; }
+.figma-skeleton-text.loc { width: 40%; }
+.figma-skeleton-text.price { width: 30%; }
+
+.figma-empty-stays {
+  grid-column: span 2;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+.figma-empty-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+.figma-empty-desc {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   6. EXPLORE THE WORLD (CIRCLES - RESPONSIVE)
+   ========================================================================== */
+.figma-explore-section {
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
+  background: #FFFFFF;
+}
+
+.figma-circles-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  margin-top: clamp(2rem, 3.5vw, 3.5rem);
+  flex-wrap: wrap;
+}
+
+.figma-circle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.figma-circle-wrapper {
+  width: clamp(75px, 12vw, 110px);
+  height: clamp(75px, 12vw, 110px);
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.figma-circle-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.figma-circle-card:hover .figma-circle-img {
+  transform: scale(1.1);
+}
+
+.figma-circle-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+/* ==========================================================================
+   7. HOW BASERA REDEFINES TRAVEL (RESPONSIVE)
+   ========================================================================== */
+.figma-how-section {
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
+  background: #FFFFFF;
+}
+
+.figma-how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: clamp(2rem, 3.5vw, 3.5rem);
+}
+
+.figma-how-card {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.25rem, 2vw, 2rem);
+  background: #FFFFFF;
+}
+
+.figma-how-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #FEF3C7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.figma-how-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 1.8vw, 1.45rem);
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 0.6rem;
+}
+
+.figma-how-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+@media (max-width: 860px) {
+  .figma-how-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+/* ==========================================================================
+   8. GLASSHOUSE QUOTE SPOTLIGHT (RESPONSIVE)
+   ========================================================================== */
+.figma-spotlight-section {
+  position: relative;
+  min-height: clamp(450px, 60vh, 75vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(4rem, 6vw, 6rem) 0;
+  overflow: hidden;
+}
+
+.figma-spotlight-bg-wrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.figma-spotlight-bg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.figma-spotlight-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.figma-spotlight-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 920px;
+  margin: 0 auto;
+  color: #FFFFFF;
+  padding: 0 1rem;
+}
+
+.figma-spotlight-quote {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3.2vw, 2.5rem);
+  font-weight: 300;
+  line-height: 1.45;
+  font-style: italic;
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.figma-spotlight-author {
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.author-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 1.8vw, 1.25rem);
+  font-weight: 500;
+}
+
+.author-role {
+  font-family: var(--font-sans);
+  font-size: clamp(0.68rem, 1vw, 0.75rem);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 4px;
+}
+
+.figma-spotlight-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #FFFFFF;
+  color: #111827;
+  padding: 0.85rem 1.8rem;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.figma-spotlight-btn:hover {
+  background: #F3F4F6;
+}
+
+/* ==========================================================================
+   9. BEYOND THE STAY (RESPONSIVE)
+   ========================================================================== */
+.figma-beyond-section {
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
+  background: #FFFFFF;
+}
+
+.figma-beyond-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: clamp(2rem, 3.5vw, 3.5rem);
+}
+
+.figma-beyond-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.figma-beyond-image-wrapper {
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-subtle);
+  margin-bottom: 0.85rem;
+}
+
+.figma-beyond-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.figma-beyond-card:hover .figma-beyond-img {
+  transform: scale(1.05);
+}
+
+.beyond-location {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.beyond-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 1.8vw, 1.3rem);
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.beyond-price {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 860px) {
+  .figma-beyond-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
+
+/* ==========================================================================
+   10. BECOME A BASERA HOST (RESPONSIVE)
+   ========================================================================== */
+.figma-host-section {
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
+  background: #FFFFFF;
+}
+
+.figma-host-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+
+.figma-host-left {
+  max-width: 500px;
+}
+
+.figma-host-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+
+.figma-host-desc {
+  font-size: clamp(0.92rem, 1.2vw, 1rem);
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.figma-host-highlight {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+}
+
+.figma-host-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #111827;
+  color: #FFFFFF;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.figma-host-cta-btn:hover {
+  background: #000000;
+}
+
+.figma-host-right {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.figma-host-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .figma-host-card {
+    grid-template-columns: 1fr;
+  }
+  .figma-host-left {
+    max-width: 100%;
+  }
+  .figma-host-right {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+/* ==========================================================================
+   11. JOIN THE BASERA JOURNAL (NEWSLETTER - RESPONSIVE)
+   ========================================================================== */
+.figma-journal-section {
+  padding: clamp(2rem, 4vw, 3rem) 0 clamp(4rem, 6vw, 7rem) 0;
+  background: #FFFFFF;
+}
+
+.figma-journal-card {
+  background: #18181B;
+  border-radius: var(--radius-2xl);
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.25rem, 4vw, 3rem);
+  text-align: center;
+  color: #FFFFFF;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.figma-journal-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.figma-journal-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  color: #FFFFFF;
+  margin-bottom: 0.75rem;
+}
+
+.figma-journal-desc {
+  font-size: clamp(0.88rem, 1.2vw, 0.95rem);
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 540px;
+  margin: 0 auto 2rem auto;
+}
+
+.figma-journal-form {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: var(--radius-full);
+  padding: 0.35rem 0.35rem 0.35rem 1.75rem;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.figma-journal-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.92rem;
+  color: var(--text-dark);
+  font-family: inherit;
+  min-width: 0;
+}
+
+.figma-journal-submit-btn {
+  background: #9C5333;
+  color: #FFFFFF;
+  border-radius: var(--radius-full);
+  padding: 0.75rem 1.6rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.figma-journal-submit-btn:hover {
+  background: #844426;
+}
+
+@media (max-width: 560px) {
+  .figma-journal-form {
+    flex-direction: column;
+    background: transparent;
+    padding: 0;
+    gap: 0.75rem;
+  }
+  .figma-journal-input {
+    width: 100%;
+    background: #FFFFFF;
+    padding: 0.85rem 1.25rem;
+    border-radius: var(--radius-full);
+  }
+  .figma-journal-submit-btn {
+    width: 100%;
+    padding: 0.85rem;
+  }
+}
+
+/* ==========================================================================
+   12. FOOTER (RESPONSIVE)
+   ========================================================================== */
+.figma-footer {
+  background: #111827;
+  color: #9CA3AF;
+  padding: clamp(3.5rem, 5vw, 5rem) 0 2.5rem 0;
+  margin-top: auto;
+  border-top: 1px solid #1F2937;
+}
+
+.figma-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: clamp(2rem, 3.5vw, 3rem);
+  padding-bottom: 3rem;
+  border-bottom: 1px solid #1F2937;
+}
+
+.figma-footer-logo {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.figma-footer-brand-text {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  max-width: 280px;
+  color: #9CA3AF;
+}
+
+.figma-footer-header {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: 1.25rem;
+}
+
+.figma-footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.figma-footer-links a {
+  font-size: 0.88rem;
+  color: #9CA3AF;
+  transition: color 0.2s ease;
+}
+
+.figma-footer-links a:hover {
+  color: #FFFFFF;
+}
+
+.figma-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 2rem;
+  font-size: 0.82rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.figma-footer-copy {
+  color: #6B7280;
+}
+
+.figma-footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  color: #9CA3AF;
+}
+
+.figma-footer-socials a:hover {
+  color: #FFFFFF;
+}
+
+@media (max-width: 1024px) {
+  .figma-footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .figma-footer-brand-col {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 640px) {
+  .figma-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1.25rem;
+  }
+  .figma-footer-brand-col {
+    grid-column: span 2;
+  }
+  .figma-footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+  }
+}
+
+/* ==========================================================================
+   DETAILS / SHOW PAGE (RESPONSIVE)
+   ========================================================================== */
+.show-container {
+  padding-top: clamp(4rem, 6vw, 6rem);
+  padding-bottom: clamp(4rem, 6vw, 6rem);
+}
+
+.show-header {
+  margin-bottom: 1.5rem;
+}
+
+.show-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.show-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.show-meta-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.show-rating-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.show-review-count {
+  color: var(--text-muted);
+}
+
+.dot-separator { color: var(--border-subtle); }
+
+.show-location-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+
+.show-category-badge {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  padding: 0.2rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.show-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.show-action-btn {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.82rem;
+}
+
+.show-gallery-box {
+  position: relative;
+  width: 100%;
+  height: clamp(300px, 45vw, 520px);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  margin-bottom: clamp(2rem, 3.5vw, 3.5rem);
+  border-radius: var(--radius-xl);
+}
+
+.show-gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.show-gallery-box:hover .show-gallery-img {
+  transform: scale(1.02);
+}
+
+.gallery-view-fullscreen-badge {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(26, 28, 28, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.show-content-layout {
+  display: grid;
+  grid-template-columns: 1fr 390px;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .show-content-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.show-main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.host-profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.host-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.host-card-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+.superhost-tag {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.host-avatar-large {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--text-dark);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+}
+
+.highlights-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.highlight-item {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.highlight-icon-box {
+  width: 38px;
+  height: 38px;
+  background: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+}
+
+.highlight-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.highlight-desc {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-top: 0.15rem;
+}
+
+.section-heading {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.show-description-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-body);
+  font-weight: 300;
+}
+
+.amenities-container {
+  padding: 2rem 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 560px) {
+  .amenities-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.amenity-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: 0.85rem 1.1rem;
+  font-size: 0.95rem;
+  border-radius: var(--radius-sm);
+}
+
+.amenity-icon { color: var(--text-muted); }
+
+.owner-actions-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.owner-actions-info { display: flex; flex-direction: column; }
+.owner-actions-btns { display: flex; gap: 0.75rem; }
+
+.reviews-section { padding-top: 1rem; }
+.reviews-header-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.review-form-card {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  border-radius: var(--radius-md);
+}
+
+.review-form-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  margin-bottom: 1.25rem;
+}
+
+.star-rating-input-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.star-rating-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.review-login-prompt {
+  background: var(--bg-subtle);
+  padding: 1.5rem;
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  border-radius: var(--radius-md);
+}
+
+.review-login-prompt .login-link {
+  color: var(--text-dark);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.review-card {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: var(--radius-md);
+}
+
+.review-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review-author-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.review-author-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.review-verified-tag {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.review-comment-text {
+  color: var(--text-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.no-reviews-text {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.map-section { padding-top: 1rem; }
+.map-location-sub {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.map-embed-wrapper {
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+/* Sticky Reservation Sidebar */
+.sticky-reserve-card {
+  position: sticky;
+  top: 6rem;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  border-radius: var(--radius-xl);
+}
+
+.reserve-price-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.reserve-price-large {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.reserve-price-night {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.reserve-rating-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.reserve-inputs-box {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.reserve-dates-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.reserve-date-col { padding: 0.65rem 0.9rem; }
+.reserve-date-col.checkout { border-left: 1px solid var(--border-subtle); }
+
+.reserve-date-col label,
+.reserve-guests-col label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.date-val {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-top: 2px;
+}
+
+.reserve-guests-col { padding: 0.65rem 0.9rem; }
+
+.reserve-select {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  background: transparent;
+  color: var(--text-dark);
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.reserve-submit-btn {
+  width: 100%;
+  padding: 0.95rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: var(--text-dark);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+}
+
+.reserve-disclaimer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.reserve-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.reserve-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.92rem;
+}
+
+.reserve-row.total {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.total-amount { color: var(--text-dark); }
+
+/* Forms (New / Edit Listing) */
+.form-layout-container {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.form-header-box {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.form-page-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+}
+
+.form-page-subtitle {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  font-weight: 300;
+}
+
+.form-split-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .form-split-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-card-glass {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: var(--radius-xl);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.4rem;
+}
+
+.form-label {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--text-dark);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+@media (max-width: 560px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+.upload-dropzone {
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1rem;
+  text-align: center;
+  background: var(--bg-subtle);
+  cursor: pointer;
+}
+
+.upload-input-hidden { display: none; }
+
+.upload-dropzone-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.dropzone-text-main {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text-dark);
+}
+
+.dropzone-text-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.form-submit-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 0.88rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: var(--text-dark);
+  color: #FFFFFF;
+  border-radius: var(--radius-md);
+}
+
+.form-preview-column {
+  position: sticky;
+  top: 6rem;
+}
+
+.preview-sticky-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.preview-label-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+}
+
+.preview-tips-card {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+}
+
+.preview-tips-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+
+.preview-tips-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Auth Pages */
+.auth-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(4rem, 6vw, 6rem) 1.25rem;
+  background: var(--bg-surface);
+}
+
+.auth-card-glass {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.5rem);
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-xl);
+}
+
+.auth-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  font-weight: 400;
+}
+
+.auth-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 0.35rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.auth-form { text-align: left; }
+
+.auth-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-field-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.auth-input { padding-left: 2.75rem; }
+
+.auth-submit-btn {
+  width: 100%;
+  padding: 0.95rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 0.75rem;
+  background: var(--text-dark);
+  color: #FFFFFF;
+  border-radius: var(--radius-md);
+}
+
+.auth-footer-text {
+  text-align: center;
+  margin-top: 1.75rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.auth-footer-link {
+  color: var(--text-dark);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Lightbox Modal */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(18, 18, 18, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+
+.lightbox-container {
+  width: 100%;
+  max-width: 1100px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: var(--shadow-modal);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-xl);
+}
+
+.lightbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.lightbox-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+}
+
+.lightbox-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.lightbox-actions { display: flex; gap: 0.5rem; }
+.lightbox-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-image-wrapper {
+  max-height: 75vh;
+  overflow: hidden;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-image {
+  max-height: 75vh;
+  width: 100%;
+  object-fit: contain;
+}
