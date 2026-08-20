@@ -30,6 +30,10 @@ const Navbar = () => {
 
   const handleNavClick = (sectionId) => {
     setMobileMenuOpen(false);
+    if (sectionId === "stays") {
+      navigate("/stays");
+      return;
+    }
     if (location.pathname === "/") {
       const el = document.getElementById(sectionId);
       if (el) {

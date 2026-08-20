@@ -9,6 +9,7 @@ import ScrollToTop from "./components/ScrollToTop";
 
 // Route Code-Splitting via React.lazy
 const HomePage = lazy(() => import("./pages/HomePage"));
+const StaysPage = lazy(() => import("./pages/StaysPage"));
 const ShowListingPage = lazy(() => import("./pages/ShowListingPage"));
 const NewListingPage = lazy(() => import("./pages/NewListingPage"));
 const EditListingPage = lazy(() => import("./pages/EditListingPage"));
@@ -112,7 +113,22 @@ function App() {
                   </PageTransitionWrapper>
                 }
               />
-              <Route path="/listings" element={<Navigate to="/" replace />} />
+              <Route
+                path="/stays"
+                element={
+                  <PageTransitionWrapper>
+                    <StaysPage />
+                  </PageTransitionWrapper>
+                }
+              />
+              <Route
+                path="/listings"
+                element={
+                  <PageTransitionWrapper>
+                    <StaysPage />
+                  </PageTransitionWrapper>
+                }
+              />
               <Route
                 path="/listings/new"
                 element={

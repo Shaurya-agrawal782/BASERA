@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import API from "../api/client";
 import HeroBanner from "../components/HeroBanner";
@@ -12,7 +12,7 @@ import BeyondTheStaySection from "../components/BeyondTheStaySection";
 import HostSection from "../components/HostSection";
 import NewsletterSection from "../components/NewsletterSection";
 import ListingCard from "../components/ListingCard";
-import { Sparkles, X, RefreshCw } from "lucide-react";
+import { Sparkles, X, RefreshCw, ArrowRight } from "lucide-react";
 
 const CATEGORY_TABS = [
   { label: "All", value: "" },
@@ -177,26 +177,36 @@ const HomePage = () => {
               </button>
             </div>
           ) : (
-            <motion.div
-              className="figma-stays-grid"
-              initial="hidden"
-              animate="visible"
-              variants={{
-                visible: {
-                  transition: {
-                    staggerChildren: 0.06,
+            <>
+              <motion.div
+                className="figma-stays-grid"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.06,
+                    },
                   },
-                },
-              }}
-            >
-              {listings.map((listing, index) => (
-                <ListingCard
-                  key={listing._id}
-                  listing={listing}
-                  index={index}
-                />
-              ))}
-            </motion.div>
+                }}
+              >
+                {listings.slice(0, 4).map((listing, index) => (
+                  <ListingCard
+                    key={listing._id}
+                    listing={listing}
+                    index={index}
+                  />
+                ))}
+              </motion.div>
+
+              {/* Explore All Stays Button */}
+              <div className="figma-view-all-wrapper">
+                <Link to="/stays" className="figma-view-all-btn">
+                  <span>Explore All Stays ({listings.length})</span>
+                  <ArrowRight size={18} />
+                </Link>
+              </div>
+            </>
           )}
         </div>
       </section>
