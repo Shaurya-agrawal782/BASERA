@@ -1,9 +1,13 @@
 const mongoose = require("mongoose");
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
+require("dotenv").config({ path: path.join(__dirname, "..", "..", ".env") });
+
 const initData = require("./data.js");
 const Listing = require("../models/listing.js");
 const User = require("../models/user.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const DB_URL = process.env.ATLASDB_URL || process.env.MONGO_URL || "mongodb://127.0.0.1:27017/basera";
 
 const categories = [
   "Trending", "Rooms", "Iconic cities", "Mountains", "Castles",
@@ -11,15 +15,18 @@ const categories = [
 ];
 
 async function seed() {
-  await mongoose.connect(MONGO_URL);
-  console.log("Connected to local DB for seeding");
+  const isAtlas = DB_URL.includes("mongodb.net");
+  console.log(`Connecting to ${isAtlas ? "MongoDB Atlas Cluster" : "MongoDB (" + DB_URL + ")"}...`);
+  
+  await mongoose.connect(DB_URL);
+  console.log("Connected successfully to Database for seeding!");
 
-  // Create demo user if none exists
-  let demoUser = await User.findOne({ username: "wanderlust_host" });
+  // Create demo host user if none exists
+  let demoUser = await User.findOne({ username: "basera_host" });
   if (!demoUser) {
-    demoUser = new User({ email: "host@wanderlust.com", username: "wanderlust_host" });
+    demoUser = new User({ email: "host@baserastays.com", username: "basera_host" });
     demoUser = await User.register(demoUser, "password123");
-    console.log("Created demo host user: @wanderlust_host / password123");
+    console.log("Created demo host user: @basera_host / password123");
   }
 
   // Check if listings exist
@@ -36,11 +43,13 @@ async function seed() {
     }));
 
     await Listing.insertMany(formattedData);
-    console.log(`Successfully seeded ${formattedData.length} sample listings!`);
+    console.log(`Successfully seeded ${formattedData.length} sample listings into the cluster! ✨`);
   } else {
     console.log(`Database already has ${count} listings. Skipping re-seed.`);
   }
 
+  await mongoose.disconnect();
+  console.log("Database connection closed.");
   process.exit(0);
 }
 

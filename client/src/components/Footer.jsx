@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
         <div className="figma-footer-grid">
           {/* Brand Info */}
           <div className="figma-footer-brand-col">
-            <span className="figma-footer-logo">Basera</span>
+            <Logo showTagline={true} />
             <p className="figma-footer-brand-text">
               A premium vacation rental marketplace curating the world's most architectural and historically exceptional stays.
             </p>
