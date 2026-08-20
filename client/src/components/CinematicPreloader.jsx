@@ -37,7 +37,13 @@ const CinematicPreloader = ({ onComplete }) => {
   const [currentFrame, setCurrentFrame] = useState(0);
   const [activeVideoIdx, setActiveVideoIdx] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
-  const [showPreloader, setShowPreloader] = useState(true);
+  const [showPreloader, setShowPreloader] = useState(() => {
+    try {
+      return !sessionStorage.getItem("basera_preloader_seen");
+    } catch (e) {
+      return true;
+    }
+  });
 
   const containerRef = useRef(null);
   const centerStageRef = useRef(null);
@@ -50,6 +56,13 @@ const CinematicPreloader = ({ onComplete }) => {
   const intervalRef = useRef(null);
   const animFrameRef = useRef(null);
   const isFinishedRef = useRef(false);
+
+  // If already seen in this session, trigger onComplete on mount
+  useEffect(() => {
+    if (!showPreloader && onComplete) {
+      onComplete();
+    }
+  }, [showPreloader, onComplete]);
 
   // Synthesize Cinematic Sound FX using Web Audio API
   const playCinematicSound = (type) => {
@@ -97,6 +110,10 @@ const CinematicPreloader = ({ onComplete }) => {
     isFinishedRef.current = true;
     clearInterval(intervalRef.current);
     if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+
+    try {
+      sessionStorage.setItem("basera_preloader_seen", "true");
+    } catch (e) {}
 
     playCinematicSound("chord");
 
