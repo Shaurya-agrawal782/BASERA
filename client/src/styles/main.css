@@ -1709,11 +1709,12 @@ h6 {
   gap: 0.85rem;
   cursor: pointer;
   flex-shrink: 0;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .figma-circle-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-5px) scale(1.03);
+  z-index: 10;
 }
 
 .figma-circle-wrapper {
@@ -1729,8 +1730,8 @@ h6 {
 }
 
 .figma-circle-card:hover .figma-circle-wrapper {
-  border-color: #D97706;
-  box-shadow: 0 16px 36px rgba(217, 119, 6, 0.22);
+  border-color: #F59E0B;
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.45), 0 12px 28px rgba(217, 119, 6, 0.2);
 }
 
 .figma-circle-img {
@@ -1743,7 +1744,7 @@ h6 {
 }
 
 .figma-circle-card:hover .figma-circle-img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .figma-circle-info {
@@ -1776,57 +1777,292 @@ h6 {
 }
 
 /* ==========================================================================
-   7. HOW BASERA REDEFINES TRAVEL (RESPONSIVE)
+   7. MOMENTS IN SANCTUARY (WARM FESTOON JHALAR LIGHTS & POLAROID GALLERY)
    ========================================================================== */
-.figma-how-section {
-  padding: clamp(3.5rem, 6vw, 6rem) 0;
+.figma-moments-section {
+  padding: clamp(4.5rem, 7vw, 7rem) 0 clamp(4rem, 6vw, 6.5rem) 0;
+  background: #FAF9F6;
+  border-top: 1px solid #EFECE6;
+  border-bottom: 1px solid #EFECE6;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Festoon Garland Wire ("Jhalar Mala") */
+.festoon-jhalar-wire-container {
+  position: relative;
+  width: 100%;
+  height: 65px;
+  margin-top: clamp(2rem, 3.5vw, 3rem);
+  overflow: hidden;
+}
+
+.festoon-wire-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.festoon-bulbs-row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 3vw;
+  pointer-events: none;
+}
+
+.festoon-bulb-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.bulb-socket {
+  width: 7px;
+  height: 5px;
+  background: #1C1917;
+  border-radius: 2px 2px 0 0;
+}
+
+.bulb-glass {
+  width: 13px;
+  height: 17px;
+  border-radius: 50% 50% 45% 45%;
+  background: radial-gradient(circle at 50% 35%, #FFFDF5 0%, #F59E0B 65%, #D97706 100%);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.8), 0 0 32px rgba(217, 119, 6, 0.4);
+  animation: warmBulbPulse 3.2s infinite alternate ease-in-out;
+  position: relative;
+}
+
+.bulb-filament {
+  width: 2px;
+  height: 6px;
   background: #FFFFFF;
+  border-radius: 1px;
+  position: absolute;
+  top: 3px;
+  left: 5.5px;
+  opacity: 0.9;
 }
 
-.figma-how-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: clamp(2rem, 3.5vw, 3.5rem);
-}
-
-.figma-how-card {
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl);
-  padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.25rem, 2vw, 2rem);
-  background: #FFFFFF;
-}
-
-.figma-how-icon-box {
-  width: 44px;
-  height: 44px;
+.bulb-glow-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: #FEF3C7;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.38) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes warmBulbPulse {
+  0% {
+    opacity: 0.85;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.65), 0 0 22px rgba(217, 119, 6, 0.3);
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.95), 0 0 38px rgba(217, 119, 6, 0.55);
+  }
+}
+
+/* Continuous GSAP Polaroid Gallery Viewport */
+.moments-marquee-viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 1.5rem 0 2.5rem 0;
+  margin-top: -12px;
+  cursor: grab;
+}
+
+.moments-marquee-viewport:active {
+  cursor: grabbing;
+}
+
+.moments-edge-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(50px, 10vw, 150px);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.moments-edge-fade.left {
+  left: 0;
+  background: linear-gradient(to right, #FAF9F6 25%, transparent 100%);
+}
+
+.moments-edge-fade.right {
+  right: 0;
+  background: linear-gradient(to left, #FAF9F6 25%, transparent 100%);
+}
+
+.moments-marquee-track {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(2.25rem, 4vw, 4rem);
+  width: max-content;
+  will-change: transform;
+  padding-top: 15px;
+}
+
+/* Hanging Polaroid Frame */
+.polaroid-hanging-frame {
+  position: relative;
+  flex-shrink: 0;
+  transform: rotate(var(--rotate-deg, 0deg));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top center;
+  cursor: pointer;
+}
+
+.polaroid-hanging-frame:hover {
+  transform: rotate(0deg) translateY(-12px) scale(1.04);
+  z-index: 10;
+}
+
+.polaroid-clip-wrap {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 4;
+}
+
+.hanging-wire {
+  width: 1.5px;
+  height: 16px;
+  background: rgba(217, 119, 6, 0.6);
+}
+
+.brass-clip {
+  width: 16px;
+  height: 10px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #F59E0B 0%, #B45309 100%);
+  border: 1px solid #78350F;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.polaroid-inner-card {
+  width: clamp(260px, 24vw, 310px);
+  background: #FFFFFF;
+  border-radius: 18px;
+  padding: 12px 12px 16px 12px;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid #EFECE6;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.polaroid-hanging-frame:hover .polaroid-inner-card {
+  border-color: #F59E0B;
+  box-shadow: 0 0 35px rgba(245, 158, 11, 0.45), 0 20px 45px rgba(217, 119, 6, 0.25), 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.polaroid-photo-box {
+  position: relative;
+  width: 100%;
+  height: clamp(200px, 20vw, 240px);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #111827;
+}
+
+.polaroid-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.polaroid-hanging-frame:hover .polaroid-photo-img {
+  transform: scale(1.08);
+}
+
+.polaroid-camera-tag {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 9999px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.04em;
+}
+
+.polaroid-caption-area {
+  padding: 12px 4px 4px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.polaroid-title-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 1.25rem;
+  justify-content: space-between;
+  gap: 8px;
 }
 
-.figma-how-title {
+.polaroid-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.3rem, 1.8vw, 1.45rem);
-  font-weight: 500;
-  color: var(--text-dark);
-  margin-bottom: 0.6rem;
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  line-height: 1.2;
 }
 
-.figma-how-desc {
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  line-height: 1.65;
+.polaroid-note {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: #6B7280;
+  line-height: 1.45;
+  margin: 0;
 }
 
-@media (max-width: 860px) {
-  .figma-how-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
+.polaroid-meta-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid #F3F4F6;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #9CA3AF;
+}
+
+.meta-loc {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #B45309;
+}
+
+.loc-icon {
+  color: #D97706;
 }
 
 /* ==========================================================================
@@ -1987,183 +2223,589 @@ h6 {
 }
 
 /* ==========================================================================
-   10. BECOME A BASERA HOST (RESPONSIVE)
+   10. BECOME A BASERA HOST (LUXURY HOST ATELIER)
    ========================================================================== */
 .figma-host-section {
-  padding: clamp(3.5rem, 6vw, 6rem) 0;
+  padding: clamp(4.5rem, 7vw, 7rem) 0;
+  background: #FAF9F6;
+  position: relative;
+}
+
+.host-atelier-card {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid #EFECE6;
+  border-radius: clamp(24px, 3vw, 36px);
+  padding: clamp(2rem, 4vw, 4rem);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04);
+}
+
+.host-atelier-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.host-atelier-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.2vw, 2.9rem);
+  line-height: 1.15;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.host-atelier-desc {
+  font-size: clamp(0.92rem, 1.1vw, 1rem);
+  color: #6B7280;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Interactive Revenue Estimator Box */
+.host-estimator-box {
+  background: #FAF9F6;
+  border: 1px solid #EFECE6;
+  border-radius: 20px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.estimator-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.estimator-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9CA3AF;
+}
+
+.estimator-pills {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.estimator-pill {
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid #E5E7EB;
+  background: #FFFFFF;
+  color: #4B5563;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.estimator-pill.active {
+  background: #111827;
+  color: #FFFFFF;
+  border-color: #111827;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.estimator-result-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.result-sub-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 2px;
+}
+
+.result-figure {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 2.5vw, 2.3rem);
+  font-weight: 600;
+  color: #111827;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.result-period {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6B7280;
+}
+
+.result-metric-chips {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.metric-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.3rem 0.75rem;
+  background: #FFFFFF;
+  border: 1px solid #EFECE6;
+  border-radius: 9999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #4B5563;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+.metric-chip-icon {
+  color: #D97706;
+}
+
+/* 3 Privileges Pillars (Clean Minimalist Editorial) */
+.host-privileges-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.privilege-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.privilege-bullet {
+  color: #D97706;
+  font-size: 0.8rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.privilege-text h5 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 2px 0;
+}
+
+.privilege-text p {
+  font-size: 0.8rem;
+  color: #6B7280;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Action CTA Row */
+.host-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.host-primary-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.85rem;
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+  color: #FFFFFF;
+  border-radius: 9999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.host-primary-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(217, 119, 6, 0.45);
+  color: #FFFFFF;
+}
+
+/* Right Editorial Image */
+.host-atelier-right {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+}
+
+.host-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+.host-hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.host-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.25) 100%);
+  pointer-events: none;
+}
+
+@media (max-width: 960px) {
+  .host-atelier-card {
+    grid-template-columns: 1fr;
+    padding: 1.75rem;
+  }
+
+  .host-atelier-right {
+    min-height: 340px;
+  }
+
+  .host-image-container {
+    min-height: 340px;
+  }
+}
+
+/* ==========================================================================
+   11. THE BASERA GAZETTE (EDITORIAL MONOGRAPH & MAGAZINE)
+   ========================================================================== */
+.figma-journal-section {
+  padding: clamp(4rem, 6vw, 6.5rem) 0 clamp(4.5rem, 7vw, 7.5rem) 0;
+  background: #FAF9F6;
+  position: relative;
+}
+
+.gazette-card {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid #EFECE6;
+  border-radius: clamp(24px, 3vw, 36px);
+  padding: clamp(2.5rem, 4.5vw, 4.5rem);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04);
+}
+
+.gazette-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.gazette-eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  background: #FAF9F6;
+  border: 1px solid #EFECE6;
+  border-radius: 9999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.gazette-sparkle {
+  color: #D97706;
+}
+
+.gazette-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  line-height: 1.12;
+  color: #111827;
+  margin: 0;
+}
+
+.gazette-desc {
+  font-size: clamp(0.92rem, 1.15vw, 1.02rem);
+  color: #6B7280;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.gazette-essays-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0.35rem 0;
+  border-top: 1px solid #F3F4F6;
+  border-bottom: 1px solid #F3F4F6;
+  padding: 1rem 0;
+}
+
+.gazette-essay-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.essay-num {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #D97706;
+}
+
+.essay-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 2px 0;
+}
+
+.essay-subtitle {
+  font-size: 0.78rem;
+  color: #6B7280;
+  margin: 0;
+}
+
+/* Subscription Form */
+.gazette-form {
+  display: flex;
+  align-items: center;
+  background: #FAF9F6;
+  border: 1px solid #E5E7EB;
+  border-radius: 9999px;
+  padding: 0.35rem 0.35rem 0.35rem 1.25rem;
+  gap: 0.5rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.gazette-form:focus-within {
+  border-color: #D97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
   background: #FFFFFF;
 }
 
-.figma-host-card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 4vw, 4rem);
+.gazette-input-wrap {
+  display: flex;
   align-items: center;
+  gap: 0.65rem;
+  flex: 1;
+  min-width: 0;
 }
 
-.figma-host-left {
-  max-width: 500px;
+.gazette-mail-icon {
+  color: #9CA3AF;
+  flex-shrink: 0;
 }
 
-.figma-host-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.8vw, 3.2rem);
-  line-height: 1.15;
-  margin-bottom: 1.25rem;
+.gazette-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem;
+  color: #111827;
 }
 
-.figma-host-desc {
-  font-size: clamp(0.92rem, 1.2vw, 1rem);
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 1.25rem;
-}
-
-.figma-host-highlight {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 2rem;
-}
-
-.figma-host-cta-btn {
+.gazette-submit-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  background: #111827;
+  gap: 0.5rem;
+  padding: 0.75rem 1.6rem;
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
   color: #FFFFFF;
-  padding: 0.9rem 2rem;
-  border-radius: var(--radius-full);
-  font-size: 0.88rem;
-  font-weight: 600;
+  border-radius: 9999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
 }
 
-.figma-host-cta-btn:hover {
-  background: #000000;
+.gazette-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(217, 119, 6, 0.35);
 }
 
-.figma-host-right {
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius-2xl);
+.gazette-micro-note {
+  font-size: 0.74rem;
+  color: #9CA3AF;
+  font-weight: 500;
+}
+
+/* Right Magazine Cover Card */
+.magazine-cover-card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 3 / 4;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: var(--shadow-card);
+  margin: 0 auto;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  transform: perspective(1000px) rotateY(-6deg) rotateX(2deg);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.figma-host-img {
+.magazine-cover-card:hover {
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.02);
+}
+
+.magazine-masthead {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+  color: #FFFFFF;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+.masthead-logo {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  color: #FFFFFF;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.masthead-issue {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #FBBF24;
+}
+
+.magazine-cover-photo-box {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.magazine-cover-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-@media (max-width: 900px) {
-  .figma-host-card {
-    grid-template-columns: 1fr;
-  }
-
-  .figma-host-left {
-    max-width: 100%;
-  }
-
-  .figma-host-right {
-    aspect-ratio: 16 / 10;
-  }
+.magazine-cover-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 40%, rgba(6,8,14,0.92) 100%);
 }
 
-/* ==========================================================================
-   11. JOIN THE BASERA JOURNAL (NEWSLETTER - RESPONSIVE)
-   ========================================================================== */
-.figma-journal-section {
-  padding: clamp(2rem, 4vw, 3rem) 0 clamp(4rem, 6vw, 7rem) 0;
-  background: #FFFFFF;
-}
-
-.figma-journal-card {
-  background: #18181B;
-  border-radius: var(--radius-2xl);
-  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.25rem, 4vw, 3rem);
-  text-align: center;
+.magazine-cover-headlines {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  z-index: 3;
   color: #FFFFFF;
-  max-width: 960px;
-  margin: 0 auto;
 }
 
-.figma-journal-eyebrow {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
+.cover-special-tag {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #F59E0B;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
   display: block;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.35rem;
 }
 
-.figma-journal-title {
+.cover-main-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-size: 1.45rem;
   font-weight: 400;
   color: #FFFFFF;
-  margin-bottom: 0.75rem;
+  line-height: 1.2;
+  margin: 0 0 0.85rem 0;
 }
 
-.figma-journal-desc {
-  font-size: clamp(0.88rem, 1.2vw, 0.95rem);
-  color: rgba(255, 255, 255, 0.75);
-  max-width: 540px;
-  margin: 0 auto 2rem auto;
-}
-
-.figma-journal-form {
+.cover-footer-row {
   display: flex;
   align-items: center;
-  background: #FFFFFF;
-  border-radius: var(--radius-full);
-  padding: 0.35rem 0.35rem 0.35rem 1.75rem;
-  max-width: 520px;
-  margin: 0 auto;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 0.5rem;
 }
 
-.figma-journal-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 0.92rem;
-  color: var(--text-dark);
-  font-family: inherit;
-  min-width: 0;
-}
+@media (max-width: 960px) {
+  .gazette-card {
+    grid-template-columns: 1fr;
+    padding: 1.75rem;
+  }
 
-.figma-journal-submit-btn {
-  background: #9C5333;
-  color: #FFFFFF;
-  border-radius: var(--radius-full);
-  padding: 0.75rem 1.6rem;
-  font-size: 0.88rem;
-  font-weight: 600;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.figma-journal-submit-btn:hover {
-  background: #844426;
+  .magazine-cover-card {
+    max-width: 320px;
+    transform: none;
+  }
 }
 
 @media (max-width: 560px) {
-  .figma-journal-form {
+  .gazette-form {
     flex-direction: column;
     background: transparent;
     padding: 0;
     gap: 0.75rem;
+    border: none;
   }
 
-  .figma-journal-input {
+  .gazette-input-wrap {
     width: 100%;
-    background: #FFFFFF;
+    background: #FAF9F6;
+    border: 1px solid #E5E7EB;
     padding: 0.85rem 1.25rem;
-    border-radius: var(--radius-full);
+    border-radius: 9999px;
   }
 
-  .figma-journal-submit-btn {
+  .gazette-submit-btn {
     width: 100%;
+    justify-content: center;
     padding: 0.85rem;
   }
 }
@@ -2176,7 +2818,7 @@ h6 {
   background: #F8F7F4;
   background-image: linear-gradient(180deg, #FBFBF9 0%, #F5F4EF 100%);
   color: #4B5563;
-  margin-top: auto;
+  margin-top: clamp(4rem, 15vw, 16rem);
   border-top: 1px solid #E6E4DF;
   position: relative;
   overflow: hidden;

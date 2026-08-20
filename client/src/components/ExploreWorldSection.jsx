@@ -63,12 +63,11 @@ const DESTINATIONS = [
 const ExploreWorldSection = ({ onSelectDestination }) => {
   const containerRef = useRef(null);
   const trackRef = useRef(null);
-  const tweenRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Create seamless infinite horizontal linear loop
-      tweenRef.current = gsap.to(trackRef.current, {
+      // Continuous non-stop infinite horizontal linear marquee
+      gsap.to(trackRef.current, {
         xPercent: -50,
         repeat: -1,
         duration: 18,
@@ -80,14 +79,6 @@ const ExploreWorldSection = ({ onSelectDestination }) => {
       ctx.revert();
     };
   }, []);
-
-  const handleMouseEnterCard = () => {
-    if (tweenRef.current) tweenRef.current.pause();
-  };
-
-  const handleMouseLeaveCard = () => {
-    if (tweenRef.current) tweenRef.current.play();
-  };
 
   // Double list for infinite loop
   const loopDestinations = [...DESTINATIONS, ...DESTINATIONS];
@@ -113,8 +104,6 @@ const ExploreWorldSection = ({ onSelectDestination }) => {
               key={`${dest.name}-${idx}`}
               className="figma-circle-card"
               onClick={() => onSelectDestination && onSelectDestination(dest.query)}
-              onMouseEnter={handleMouseEnterCard}
-              onMouseLeave={handleMouseLeaveCard}
             >
               <div className="figma-circle-wrapper">
                 <img

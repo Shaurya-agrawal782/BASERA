@@ -216,24 +216,24 @@ const HomePage = () => {
         <ExploreWorldSection onSelectDestination={handleSearchSubmit} />
       )}
 
-      {/* 6. HOW BASERA REDEFINES TRAVEL */}
-      {!queryParam && !categoryParam && (
-        <HowItWorksSection />
-      )}
-
-      {/* 7. GLASSHOUSE QUOTE SPOTLIGHT */}
-      {!queryParam && !categoryParam && (
-        <SpotlightSection onExploreClick={scrollToStays} />
-      )}
-
-      {/* 8. BEYOND THE STAY (CURATED ADD-ONS) */}
+      {/* 6. BEYOND THE STAY (CURATED ADD-ONS) */}
       {!queryParam && !categoryParam && (
         <BeyondTheStaySection />
       )}
 
-      {/* 9. BECOME A BASERA HOST */}
+      {/* 7. MOMENTS IN SANCTUARY (WARM JHALAR LIGHTS & POLAROID GALLERY) */}
+      {!queryParam && !categoryParam && (
+        <HowItWorksSection />
+      )}
+
+      {/* 8. BECOME A BASERA HOST */}
       {!queryParam && !categoryParam && (
         <HostSection />
+      )}
+
+      {/* 9. GLASSHOUSE QUOTE SPOTLIGHT */}
+      {!queryParam && !categoryParam && (
+        <SpotlightSection onExploreClick={scrollToStays} />
       )}
 
       {/* 10. JOIN THE BASERA JOURNAL */}
