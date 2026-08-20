@@ -100,60 +100,65 @@ const CinematicPreloader = ({ onComplete }) => {
 
     playCinematicSound("chord");
 
+    // Trigger homepage emergence simultaneously with the dissolve
+    if (onComplete) onComplete();
+
     const tl = gsap.timeline({
       onComplete: () => {
         setShowPreloader(false);
-        if (onComplete) onComplete();
       },
     });
 
-    // 1. Golden Flare Sweep
+    // 1. Golden Flare Sweep & Soft Radiance
     if (flareRef.current) {
       tl.to(flareRef.current, {
         opacity: 1,
-        scaleX: 3.2,
-        duration: 0.7,
-        ease: "power3.out",
+        scaleX: 3.5,
+        duration: 0.8,
+        ease: "power2.out",
       });
     }
 
-    // 2. Cinematic Center Stage Dissolve
+    // 2. Letters Bloom & Scale Forward smoothly
     if (centerStageRef.current) {
       tl.to(
         centerStageRef.current,
         {
-          scale: 1.05,
+          scale: 1.08,
           opacity: 0,
-          duration: 0.8,
+          duration: 1.1,
           ease: "power3.inOut",
         },
-        "-=0.3"
+        "-=0.4"
       );
     }
 
-    // 3. Staggered Vertical Shutter Blade Retraction
+    // 3. Staggered Lacquer Shutter Blade Retraction from Center Outward
     tl.to(
       ".preloader-shutter-blade",
       {
         scaleY: 0,
         transformOrigin: (i) => (i % 2 === 0 ? "top" : "bottom"),
-        stagger: 0.06,
-        duration: 1.1,
+        stagger: {
+          each: 0.08,
+          from: "center",
+        },
+        duration: 1.3,
         ease: "power4.inOut",
       },
-      "-=0.5"
+      "-=0.8"
     );
 
-    // 4. Smooth Root Container Fade
+    // 4. Smooth Root Container Crossfade
     if (containerRef.current) {
       tl.to(
         containerRef.current,
         {
           opacity: 0,
-          duration: 0.4,
+          duration: 0.7,
           ease: "power2.inOut",
         },
-        "-=0.4"
+        "-=0.7"
       );
     }
   };
