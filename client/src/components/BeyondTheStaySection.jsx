@@ -14,7 +14,7 @@ const EXPERIENCES = [
     unit: "/ guest",
     duration: "3.5 Hours",
     image:
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=2400&q=95",
     desc: "An intimate 5-course degustation menu prepared by a private chef on your caldera terrace overlooking the sunset.",
     highlights: ["5-Course Artisanal Menu", "Sommelier Wine Pairing", "Private Terrace Seating"],
   },
@@ -27,7 +27,7 @@ const EXPERIENCES = [
     unit: "/ guest",
     duration: "2.5 Hours",
     image:
-      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=2400&q=95",
     desc: "Private morning access to a 400-year-old Daitoku-ji sub-temple with an authentic matcha tea master.",
     highlights: ["Private Tea Master", "Exclusive Zen Garden Access", "Historical Monograph"],
   },
@@ -40,7 +40,7 @@ const EXPERIENCES = [
     unit: "/ guest",
     duration: "4.0 Hours",
     image:
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=2400&q=95",
     desc: "Private heated cedar wood onsen soaking under the gaze of the Matterhorn, followed by alpine botanical oils.",
     highlights: ["Panoramic Hot Bath", "Herbal Aromatherapy", "Mountain Spring Teas"],
   },
@@ -53,7 +53,7 @@ const EXPERIENCES = [
     unit: "/ voyage",
     duration: "3.0 Hours",
     image:
-      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=2400&q=95",
     desc: "Drift past neoclassical villas and hidden grottos aboard a restored 1968 mahogany Riva Aquarama.",
     highlights: ["Captained Mahogany Riva", "Prosecco & Cicchetti", "Villa Balbianello Views"],
   },
@@ -66,7 +66,7 @@ const EXPERIENCES = [
     unit: "/ guest",
     duration: "3.0 Hours",
     image:
-      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=2400&q=95",
     desc: "Soar above the desert dunes as the morning sun casts amber hues over the snow-capped High Atlas range.",
     highlights: ["Sunrise Champagne Flight", "Traditional Berber Breakfast", "360° Mountain Panorama"],
   },
@@ -79,7 +79,7 @@ const EXPERIENCES = [
     unit: "/ guest",
     duration: "4.0 Hours",
     image:
-      "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=2400&q=95",
     desc: "Forage for prized white truffles with trained Lagotto dogs across private estate forests, followed by cellar tasting.",
     highlights: ["Trained Foraging Dogs", "Barolo & Brunello Tasting", "Handmade Pasta Lunch"],
   },

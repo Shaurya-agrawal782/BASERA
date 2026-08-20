@@ -9,7 +9,7 @@ const MOMENTS = [
     location: "Oia, Santorini",
     time: "19:42 PM · Private Terrace",
     image:
-      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=95&w=1800&auto=format&fit=crop",
     rotation: -2.5,
     note: "Uncorking Assyrtiko as the Aegean turns to liquid gold.",
   },
@@ -19,7 +19,7 @@ const MOMENTS = [
     location: "Val d'Orcia, Tuscany",
     time: "21:15 PM · Estate Courtyard",
     image:
-      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=95&w=1800&auto=format&fit=crop",
     rotation: 3,
     note: "Under centuries-old olive boughs with warm hanging festoons.",
   },
@@ -29,7 +29,7 @@ const MOMENTS = [
     location: "Zermatt, Swiss Alps",
     time: "18:30 PM · Alpine Balcony",
     image:
-      "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?q=95&w=1800&auto=format&fit=crop",
     rotation: -1.8,
     note: "Crisp mountain air, cedar woodsmoke, and endless peaks.",
   },
@@ -39,7 +39,7 @@ const MOMENTS = [
     location: "Bellagio, Lake Como",
     time: "17:50 PM · Private Jetty",
     image:
-      "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=95&w=1800&auto=format&fit=crop",
     rotation: 2.2,
     note: "Drifting past neoclassical villas in the soft evening breeze.",
   },
@@ -49,7 +49,7 @@ const MOMENTS = [
     location: "Amalfi Coast, Italy",
     time: "20:10 PM · Azure Villa",
     image:
-      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=95&w=1800&auto=format&fit=crop",
     rotation: -3.2,
     note: "Where the pool edge disappears into the glowing Mediterranean.",
   },
@@ -59,7 +59,7 @@ const MOMENTS = [
     location: "Ubud, Bali",
     time: "07:15 AM · Canopy Pavilion",
     image:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=95&w=1800&auto=format&fit=crop",
     rotation: 1.5,
     note: "Waking up to birdsong and mist rising through ancient palms.",
   },
@@ -69,7 +69,7 @@ const MOMENTS = [
     location: "Merzouga Dunes, Morocco",
     time: "22:45 PM · Stargazer Dome",
     image:
-      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=95&w=1800&auto=format&fit=crop",
     rotation: -2,
     note: "A glowing hearth beneath an unpolluted ocean of stars.",
   },
@@ -79,7 +79,7 @@ const MOMENTS = [
     location: "Positano, Italy",
     time: "19:05 PM · Cliffside Suite",
     image:
-      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=95&w=1800&auto=format&fit=crop",
     rotation: 2.8,
     note: "Pastel houses cascading down into the sun-drenched marina.",
   },

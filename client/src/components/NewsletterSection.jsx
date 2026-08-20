@@ -97,7 +97,7 @@ const NewsletterSection = () => {
               {/* Cover Background Photo */}
               <div className="magazine-cover-photo-box">
                 <img
-                  src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+                  src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=95"
                   alt="Basera Gazette Cover"
                   className="magazine-cover-photo"
                   loading="lazy"

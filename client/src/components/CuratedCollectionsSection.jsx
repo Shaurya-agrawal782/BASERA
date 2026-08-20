@@ -11,7 +11,7 @@ const COLLECTIONS = [
     category: "Mountains",
     tagline: "Alpine Solitude & Nordic Cabins",
     video: "https://assets.mixkit.co/videos/preview/mixkit-fog-over-the-mountain-peaks-33068-large.mp4",
-    poster: "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?q=80&w=1200&auto=format&fit=crop",
+    poster: "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?q=95&w=2400&auto=format&fit=crop",
   },
   {
     id: "coastal",
@@ -21,7 +21,7 @@ const COLLECTIONS = [
     category: "Amazing pools",
     tagline: "Mediterranean Cliffs & Azure Pools",
     video: "https://assets.mixkit.co/videos/preview/mixkit-waves-coming-to-the-beach-5016-large.mp4",
-    poster: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?q=80&w=1200&auto=format&fit=crop",
+    poster: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?q=95&w=2400&auto=format&fit=crop",
   },
   {
     id: "heritage",
@@ -31,7 +31,7 @@ const COLLECTIONS = [
     category: "Castles",
     tagline: "Tuscan Castles & Historic Villas",
     video: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beautiful-villa-with-a-pool-42512-large.mp4",
-    poster: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop",
+    poster: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=95&w=2400&auto=format&fit=crop",
   },
   {
     id: "desert",
@@ -41,7 +41,7 @@ const COLLECTIONS = [
     category: "Iconic cities",
     tagline: "Oasis Pavilions & Stargazing Domes",
     video: "https://assets.mixkit.co/videos/preview/mixkit-red-sand-dunes-in-the-desert-42544-large.mp4",
-    poster: "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80",
+    poster: "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=2400&q=95",
   },
   {
     id: "tropical",
@@ -51,7 +51,7 @@ const COLLECTIONS = [
     category: "Amazing pools",
     tagline: "Balinese Rainforests & Eco-Villas",
     video: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-luxury-hotel-resort-with-swimming-pool-42510-large.mp4",
-    poster: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
+    poster: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2400&q=95",
   },
 ];
 

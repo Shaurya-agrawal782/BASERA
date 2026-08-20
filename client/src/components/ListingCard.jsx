@@ -29,7 +29,7 @@ const ListingCard = ({ listing, showTax, index = 0 }) => {
         {/* Card Image with Wishlist Button */}
         <div className="stay-image-container">
           <img
-            src={listing.image?.url || "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"}
+            src={listing.image?.url || "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2400&q=95"}
             alt={listing.title}
             className="stay-card-img"
             loading="lazy"
