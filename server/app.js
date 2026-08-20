@@ -7,7 +7,6 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const path = require("path");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const passport = require("passport");
@@ -24,7 +23,7 @@ const PORT = process.env.PORT || 8080;
 
 async function startServer() {
   const atlasUrl = process.env.ATLASDB_URL;
-  const localUrl = "mongodb://127.0.0.1:27017/wanderlust";
+  const localUrl = "mongodb://127.0.0.1:27017/basera";
 
   let connectedUrl = localUrl;
 
@@ -43,12 +42,12 @@ async function startServer() {
         await mongoose.disconnect();
       } catch (e) {}
       await mongoose.connect(localUrl);
-      console.log("Connected to Local MongoDB (wanderlust)!");
+      console.log("Connected to Local MongoDB (basera)!");
       connectedUrl = localUrl;
     }
   } else {
     await mongoose.connect(localUrl);
-    console.log("Connected to Local MongoDB (wanderlust)!");
+    console.log("Connected to Local MongoDB (basera)!");
     connectedUrl = localUrl;
   }
 
