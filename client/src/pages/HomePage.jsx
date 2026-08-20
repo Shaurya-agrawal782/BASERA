@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import API from "../api/client";
 import HeroBanner from "../components/HeroBanner";
 import PressSection from "../components/PressSection";
+import ManifestoSection from "../components/ManifestoSection";
 import CuratedCollectionsSection from "../components/CuratedCollectionsSection";
 import ExploreWorldSection from "../components/ExploreWorldSection";
 import HowItWorksSection from "../components/HowItWorksSection";
@@ -143,6 +144,42 @@ const HomePage = () => {
             scrollTrigger: {
               trigger: ".figma-stays-grid",
               start: "top 82%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // 5.5. Basera Manifesto & Philosophy Entrance
+      const manifestoSection = document.querySelector(".basera-manifesto-section");
+      if (manifestoSection) {
+        gsap.fromTo(
+          ".manifesto-content-box",
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: manifestoSection,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+        gsap.fromTo(
+          ".manifesto-pillar-item",
+          { opacity: 0, y: 25 },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.12,
+            duration: 0.75,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".manifesto-pillars-grid",
+              start: "top 85%",
               toggleActions: "play none none none",
             },
           }
@@ -372,6 +409,11 @@ const HomePage = () => {
 
       {/* 2. AS FEATURED IN PRESS STRIP */}
       <PressSection />
+
+      {/* 2.5. BASERA MANIFESTO & BRAND PHILOSOPHY */}
+      {!queryParam && (
+        <ManifestoSection />
+      )}
 
       {/* 3. CURATED COLLECTIONS */}
       {!queryParam && (

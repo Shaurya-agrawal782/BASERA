@@ -1094,8 +1094,139 @@ h6 {
 }
 
 /* ==========================================================================
-   4. CURATED COLLECTIONS (RESPONSIVE)
+   3.5. BASERA MANIFESTO & PHILOSOPHY (EDITORIAL INTRO)
    ========================================================================== */
+.basera-manifesto-section {
+  padding: clamp(4rem, 6.5vw, 6.5rem) 0 clamp(2.5rem, 4vw, 4rem) 0;
+  background: #FAF9F6;
+  position: relative;
+  text-align: center;
+  border-bottom: 1px solid #EFECE6;
+}
+
+.manifesto-content-box {
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.manifesto-eyebrow-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.manifesto-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  background: #FFFFFF;
+  border: 1px solid #EFECE6;
+  border-radius: 9999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.manifesto-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.6vw, 3.1rem);
+  font-weight: 400;
+  color: #111827;
+  line-height: 1.22;
+  margin: 0;
+  max-width: 860px;
+}
+
+.manifesto-headline em {
+  font-style: italic;
+  color: #D97706;
+  font-family: var(--font-serif);
+}
+
+.manifesto-body-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  color: #4B5563;
+  line-height: 1.8;
+  margin: 0;
+  max-width: 780px;
+  font-weight: 400;
+}
+
+.manifesto-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  margin-top: clamp(1.5rem, 2.5vw, 2.5rem);
+  width: 100%;
+  text-align: left;
+  border-top: 1px solid #EFECE6;
+  padding-top: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+.manifesto-pillar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #FFFFFF;
+  border: 1px solid #EFECE6;
+  padding: 1.5rem 1.35rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.manifesto-pillar-item:hover {
+  transform: translateY(-3px);
+  border-color: #D97706;
+  box-shadow: 0 10px 25px rgba(217, 119, 6, 0.12);
+}
+
+.pillar-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #FEF3C7;
+  color: #D97706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pillar-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.pillar-desc {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.8rem;
+  color: #6B7280;
+  margin: 0;
+  line-height: 1.55;
+}
+
+@media (max-width: 820px) {
+  .manifesto-pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
 /* ==========================================================================
    4. CURATED COLLECTIONS (3D ELEVATED PEDESTAL STAGE)
    ========================================================================== */
